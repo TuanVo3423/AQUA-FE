@@ -1,6 +1,5 @@
 import { HeartStraight, List, MagnifyingGlass, MagnifyingGlassPlus, ShoppingCart, UserCircle , DotsThreeCircle ,House ,X, Storefront, Info, PhoneCall } from 'phosphor-react';
-
-import React, { useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 const data = [
@@ -28,9 +27,10 @@ const data = [
 ]
 export default function Header() {
     const [isShowMenuMobile,setIsShowMenuMobile] = useState(false);
+    
   return (
     <div>
-         <header className="py-4 shadow-sm bg-pink-100 h-[100px] lg:bg-white">
+         <header className="flex shadow-sm bg-primary h-[80px] lg:bg-white">
         <div className="container flex items-center justify-between">
             {/* <!-- logo --> */}
             <Link to={'/'} className="lg:block w-32 h-16">

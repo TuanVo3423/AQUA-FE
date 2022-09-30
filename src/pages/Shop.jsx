@@ -3,10 +3,10 @@ import CardProduct from '../components/CardProduct';
 import Breadcrum from '../components/Breadcrum';
 import Navbar from './components/Navbar';
 
-export default function shop() {
+export default function shop({title}) {
   return (
     <div>
-      <Breadcrum />
+      {/* <Breadcrum tab={title} /> */}
     <div className="container grid lg:grid-cols-4 grid-cols-1 gap-6 pt-4 pb-16 items-start">
     {/* sidebar */}
     <div className="lg:col-span-1 col-span-3 bg-white px-4 pt-4 pb-6 shadow rounded overflow-hidden lg:static z-10 w-full md:block">

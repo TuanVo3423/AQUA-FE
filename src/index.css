@@ -4,7 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
+.slick-prev:before,
+.slick-next:before
+{
+  content: '';
+}
+.slick-prev, .slick-next{
+  width: 0;
+  height: 0;
+}
+.slick-dots{
+  bottom: -40px;
+}
+.slick-dots li.slick-active button:before{
+  color: #2aa6e3;
+  opacity: .75;
+}
+.slick-dots li button:before{
+  color: #2aa6e3;
+  opacity: .4;
+}
+.slick-dots>.slick-active button:before{
+  transform: scale(2);
 
+}
 
 /* input box */
 .input-box{

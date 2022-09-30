@@ -1,7 +1,21 @@
 import { List } from 'phosphor-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux/es/exports';
+import { createSlice } from '@reduxjs/toolkit';
+import { titleIndexNavbar } from '../../redux/Selector';
+export const NavbarSlice = createSlice({
+    name: 'navbar',
+    initialState: {
+        indexTitle : 0,
+    },
+    reducers: {
+        setIndexNavbarTitle: (state, action) => {
+            state.indexTitle = action.payload;
+        },
+    },
+});
 
 const data = [
     {
@@ -31,33 +45,54 @@ const data = [
 ];
 const categoryTitle = [
     {
-        title : 'Home',
+        id : 0,
+        title : 'HOME',
         path : '/'
     },
     {
-        title : 'Shop',
+        id : 1,
+        title : 'SHOP',
         path : '/shop'
     },
     {
-        title : 'About Us',
+        id : 2,
+        title : 'ABOUT US',
         path : '/about-me'
     },
     {
-        title : 'Contact Us',
+        id : 3,
+        title : 'CONTACT US',
         path : '/contact-me'
+    },
+];
+const categoryTitle02 = [
+    {
+        id : 4,
+        title : 'REGISTER /',
+        path : '/register'
+    },
+    {
+        id : 5,
+        title : 'LOGIN',
+        path : '/login'
     },
 ];
 
 
+
 export default function Navbar() {
+    const dispatch = useDispatch();
     // const [hasUser] = useState({
-    //     name : 'tuanvo'
-    // });
+        //     name : 'tuanvo'
+        // });
+        const {indexTitle} = useSelector(titleIndexNavbar);
+        console.log('titleIndex',indexTitle);
+  
     const [hasUser] = useState(false);
 
   return (
     <div>
-        <div className="bg-gray-800 bg-black hidden lg:block">
+        <div className="bg-black hidden lg:block">
         <div className="container">
             <div className="flex">
                 {/* <!-- all category --> */}
@@ -65,7 +100,7 @@ export default function Navbar() {
                     <span className="text-white">
                     <List size={22} weight="bold" />
                     </span>
-                    <span className="capitalize ml-2 text-white">All categories</span>
+                    <span className="uppercase ml-2 font-semibold text-white">All categories</span>
 
                     <div className="absolute left-0 top-full w-full bg-white shadow-md py-3 invisible opacity-0 group-hover:opacity-100 group-hover:visible transition duration-300 z-50 divide-y divide-gray-300 divide-dashed">
                         {/* <!-- single category --> */}
@@ -86,9 +121,9 @@ export default function Navbar() {
                 {/* <!-- nav menu --> */}
                 <div className="flex items-center justify-between flex-grow pl-12">
                     <div className="flex items-center space-x-6 text-base capitalize">
-                        {categoryTitle.map((item,index) => (
-                            <Link key={index} to={item.path} className="text-gray-200 hover:text-white transition">{item.title}</Link>
-                        ))}
+                        {categoryTitle.map((item,index) => {
+                           return <Link onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(index))} key={index} to={item.path} className={`text-gray-200 p-2 border-solid font-semibold ${index === indexTitle ? 'border-b-[2px] ' : ''} hover:text-white transition`}>{item.title}</Link>
+})}
                        
                     </div>
                     {hasUser ? (
@@ -100,9 +135,15 @@ export default function Navbar() {
                         </div>
                     ) : (
                         <div className='flex text-white gap-x-2'>
-                                <Link to={'/register'}><p className='ml-auto justify-self-end text-gray-200 hover:text-white transition'>Register</p></Link>
-                                /
-                                <Link to={'/login'}><p className='ml-auto justify-self-end text-gray-200 hover:text-white transition'>Login</p></Link>
+                            {categoryTitle02.map((item,index)=> {
+                                return (
+                                    <React.Fragment  key={item.id}>
+                                    <Link to={item.path}><p onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(item.id))} className={`ml-auto justify-self-end font-semibold ${item.id === indexTitle ? 'border-b-[2px] ' : ''} uppercase text-gray-200 hover:text-white transition`}>{item.title}</p></Link>
+                                    </React.Fragment>
+                                )
+                            })}
+                                
+                                
                         </div>
                     //     <a href="login.html" className="ml-auto justify-self-end text-gray-200 hover:text-white transition">
                     //         Register

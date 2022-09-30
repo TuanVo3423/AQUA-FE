@@ -1,12 +1,9 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Breadcrum from '../components/Breadcrum';
 import CardProduct from '../components/CardProduct';
 
 export default function Detail() {
   return (
     <div>
-      <Breadcrum />
         <div className="container pt-4 pb-6 grid lg:grid-cols-2 gap-6">
         {/* product image */}
         <div>

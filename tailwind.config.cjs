@@ -17,8 +17,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        // primary: '#FD3D57'
-        primary: '#1435c3'
+        // primary: '#FD3D57'#2aa6e3
+        // primary: '#1435c3',
+        primary: '#2aa6e3',
       },
       fontFamily:{
         poppins:  "'Poppins', sans-serif",
@@ -32,5 +33,7 @@ module.exports = {
       display: ['group-hover']
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

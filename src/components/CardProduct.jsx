@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 export default function CardProduct() {
   return (
-        <div className="group rounded bg-white shadow overflow-hidden">
+        <div className="group rounded mx-2 bg-white shadow h-full overflow-hidden">
                     <div className="relative">
-                        <img src="./images/products/product1.jpg" className="w-full"></img>
+                        <img src="./images/products/product1.jpg" className="w-full h-full"></img>
                         <div
                             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                             <a href="view.html"

@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/mainlayout';
 import { publicRoutes } from './routes';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,13 +12,13 @@ function App() {
     <BrowserRouter>
       <Routes>
           {publicRoutes.map((route,index) => {
-            const Page = route.component;
+            const Page = route.component; 
             return (
               <Route
               key={index}
               path={route.path}
               element={
-                <MainLayout path={route.title}>
+                <MainLayout titleIndex={count} path={route.title} isShowBreadcrum={route.isShowBreadcrum}>
                     <Page />
                   </MainLayout>
               }

@@ -82,7 +82,7 @@ export default function Account() {
         </div>
         {/* sidebar end */}
         {/* account content */}
-        <div className="col-span-9 grid md:grid-cols-3 gap-4 mt-6 lg:mt-0">
+        <div className="col-span-9 grid md:grid-cols-1 gap-4 mt-6 lg:mt-0">
           {/* single card */}
           <div className="shadow rounded bg-white px-4 pt-6 pb-8">
             <div className="flex justify-between items center mb-4">
