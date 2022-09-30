@@ -60,56 +60,56 @@ export default function Banner() {
     onMouseOut={onOutHoverBanner}
     >
     <Slider {...settings}>
-        <div
-       
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('https://lh3.googleusercontent.com/Z9EKSE-M6wIGl2iCCx9iPjmD3BI8zYRY_braf8j3SVn22HwVzNSWyCPGtKgmjW3S64iZf9fkkBfI92BKvGKTcwqe0Vpnl97C=rw-w1920')]">
-        {/* <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-gray-800 font-medium mb-4">
-                Best Collection For 
-            </h1>
-            <p className="text-base text-gray-600 leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
-                assumenda aliquid inventore nihil laboriosam odio
-            </p>
-            <div className="mt-12">
-                <a href="shop.html" className="bg-primary border border-primary text-white px-8 py-3 font-medium rounded-md uppercase hover:bg-transparent
-               hover:text-primary transition">
-                    Shop now
-                </a>
-            </div>
-        </div> */}
-        </div>
-        <div
-        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('../images/banner-bg.jpg')]">
+      
+    <div   
+        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
         <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-gray-800 font-medium mb-4">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
                 Best Collection For 
             </h1>
-            <p className="text-base text-gray-600 leading-6">
+            <p className="text-base text-white leading-6">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
                 assumenda aliquid inventore nihil laboriosam odio
             </p>
             <div className="mt-12">
-                <a href="shop.html" className="bg-primary border border-primary text-white px-8 py-3 font-medium rounded-md uppercase hover:bg-transparent
-               hover:text-primary transition">
+                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">
                     Shop now
                 </a>
             </div>
         </div>
         </div>
-        <div
-        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('../images/banner-bg.jpg')]">
+        <div   
+        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
         <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-gray-800 font-medium mb-4">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
                 Best Collection For 
             </h1>
-            <p className="text-base text-gray-600 leading-6">
+            <p className="text-base text-white leading-6">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
                 assumenda aliquid inventore nihil laboriosam odio
             </p>
             <div className="mt-12">
-                <a href="shop.html" className="bg-primary border border-primary text-white px-8 py-3 font-medium rounded-md uppercase hover:bg-transparent
-               hover:text-primary transition">
+                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">
+                    Shop now
+                </a>
+            </div>
+        </div>
+        </div>
+        <div   
+        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
+        <div className="container">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
+                Best Collection For 
+            </h1>
+            <p className="text-base text-white leading-6">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
+                assumenda aliquid inventore nihil laboriosam odio
+            </p>
+            <div className="mt-12">
+                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">
                     Shop now
                 </a>
             </div>

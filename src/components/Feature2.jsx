@@ -30,7 +30,7 @@ export default function Feature2() {
                 return (
             <div key={item.id}
             onMouseOver={()=> handleHover(index)}
-            className={`${index === isHover ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-[#999]'} transition-all duration-500 flex flex-col items-center px-6 py-9 justify-center gap-y-1 text-base font-normal border-[1px] rounded-3xl`}>
+            className={`${index === isHover ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-primary'} transition-all duration-500 flex flex-col items-center px-6 py-9 justify-center gap-y-1 text-base font-normal border-[1px] rounded-3xl`}>
                 <p>{item.line1}</p>
                 <p>{item.line2}</p>
             </div>

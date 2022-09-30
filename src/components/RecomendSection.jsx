@@ -50,7 +50,7 @@ export default function RecomendSection() {
     prevArrow:isDesktop && <SamplePrevArrow />
   };
   return (
-    <div className="relative container mb-8">
+    <div className="relative container mb-24">
          <div className='pb-5'>
          <h2 className="inline relative text-2xl md:text-3xl font-medium text-gray-800 uppercase mb-6 after:content-[''] after:block after:absolute after:-right-1/4 after:top-1/2 after:w-[50px] after:h-[4px] after:bg-primary">TOP NEW LAPTOP  </h2>
           </div>

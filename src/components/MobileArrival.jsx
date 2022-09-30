@@ -10,7 +10,7 @@ const data = [1,2,3,4];
 export default function MobileArrival() {
   return (
     
-         <div className="container pb-16 mt-10 flex flex-col gap-y-10">
+         <div className="container pb-16 mt-20 flex flex-col gap-y-10">
           <div className='pb-5'>
         <h2 className="inline relative text-2xl md:text-3xl font-medium text-gray-800 uppercase mb-6 after:content-[''] after:block after:absolute after:-right-1/4 after:top-1/2 after:w-[50px] after:h-[4px] after:bg-primary">Top New Mobile</h2>
           </div>
