@@ -26,8 +26,8 @@ export default function AdMobile() {
             <div className='flex gap-3 flex-wrap'>
                 {data.map((item,index) => {
                     return (
-
                     <div 
+                    key={index}
                     style={{flex:'1 0 21%'}}
                     className='flex flex-col justify-center items-center py-1 px-4 rounded-full border-white border-2 bg-primary text-white'>
                         <p className='text-lg'>{item.number}</p>
