@@ -13,7 +13,7 @@ function* registerSaga (action){
         yield put(AccountReducer.actions.registerSuccess(registerAccount.data));
         // set message success
     } catch (error) {
-        console.error(error.response.data);
+        yield put(SystemReducer.actions.setMessageAlert({...error.response.data,kind : true}));
     }
 }
 
