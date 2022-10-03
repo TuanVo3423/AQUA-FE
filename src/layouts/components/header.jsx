@@ -1,5 +1,7 @@
 import { HeartStraight, List, MagnifyingGlass, MagnifyingGlassPlus, ShoppingCart, UserCircle , DotsThreeCircle ,House ,X, Storefront, Info, PhoneCall } from 'phosphor-react';
 import React, { useCallback, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { AccountSelector } from '../../redux/Selectors/Account';
 import {Link} from 'react-router-dom';
 
 const data = [
@@ -26,6 +28,7 @@ const data = [
     
 ]
 export default function Header() {
+    const {username} = useSelector(AccountSelector);
     const [isShowMenuMobile,setIsShowMenuMobile] = useState(false);
     
   return (
@@ -134,9 +137,9 @@ export default function Header() {
                 </Link>
                 <Link to={'/account'} className="text-center flex flex-col justify-center items-center text-gray-700 hover:text-primary transition relative">
                     <span
-                        className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">5</span>
+                        className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">0</span>
                             <UserCircle size={24} weight="bold" />
-                    <p className="text-xs leading-3">Account</p>
+                    <p className="text-xs leading-3">{username || 'Account'}</p>
                 </Link>
                 
             </div>

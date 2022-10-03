@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
-
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AccountReducer } from '../redux/Reducers/Account';
 export default function Account() {
   const [choice , setChoice] = useState();
+  const dispatch = useDispatch();
+  const handleSigout = async() => {
+    await dispatch(AccountReducer.actions.signOutRequest());
+    await window.location.reload();
+  }
   return (
     <div>
           <div className="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
@@ -69,12 +76,12 @@ export default function Account() {
             {/* single link end */}
             {/* single link */}
             <div className="pl-8 pt-4">
-              <a href="#" className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block">
+              <div onClick={handleSigout}  className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block">
                 logout
                 <span className="absolute -left-8 top-0 text-base">
                   <i className="fas fa-sign-out-alt" />
                 </span>
-              </a>
+              </div>
             </div>
             {/* single link end */}
           </div>

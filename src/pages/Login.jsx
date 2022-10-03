@@ -1,6 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { AccountReducer } from '../redux/Reducers/Account';
+import { AccountSelector } from '../redux/Selectors/Account';
+import { SystemReducer } from '../redux/Reducers/System';
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  let count = 0;
+    const {loginSuccess} = useSelector(AccountSelector);
+    useEffect(() => {
+      if(loginSuccess ){
+        dispatch(SystemReducer.actions.setMessageAlert({
+          message : 'You login successfully, If you want to login again, you have to signout!',
+          type : 'success',
+          kind : true,
+        }))
+        history('/');
+      }
+    },[history, loginSuccess]);
+    const [dataInput, setDataInput] = useState({
+        username : '',
+        password : '',
+      });
+      const handleOnchangeNameInput = (e) => {
+        setDataInput({
+          ...dataInput,
+          username : e.target.value,
+        });
+      }
+      const handleOnchangePassWordInput = (e) => {
+        setDataInput({
+          ...dataInput,
+          password : e.target.value,
+        });
+      }
+      
+      const handleLogin = async() => {
+        await dispatch(AccountReducer.actions.loginRequest(dataInput));
+        
+      }
   return (
     <div>
          <div className="container py-16">
@@ -11,17 +51,17 @@ export default function Login() {
           <p className="text-gray-600 mb-6 text-sm">
             Login if you are a returing customer
           </p>
-          <form action>
+          <div>
             <div className="space-y-4">
               <div>
                 <label className="text-gray-600 mb-2 block">
-                  Email Address <span className="text-primary">*</span>
+                  UserName <span className="text-primary">*</span>
                 </label>
-                <input type="email" className="input-box" placeholder="example@mail.com" />
+                <input onChange={handleOnchangeNameInput} type="email" className="input-box" placeholder="Jon" />
               </div>
               <div>
                 <label className="text-gray-600 mb-2 block">Password <span className="text-primary">*</span></label>
-                <input type="password" className="input-box" placeholder="type password" />
+                <input onChange={handleOnchangePassWordInput} type="password" className="input-box" placeholder="Type password" />
               </div>
             </div>
             <div className="flex items-center justify-between mt-6">
@@ -34,11 +74,11 @@ export default function Login() {
               <a href="#" className="text-primary">Forgot Password?</a>
             </div>
             <div className="mt-4">
-              <button type="submit" className="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
+              <button onClick={handleLogin} className="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
                 Login
               </button>
             </div>
-          </form>
+          </div>
           {/* login with social */}
           <div className="mt-6 flex justify-center relative">
             <div className="absolute left-0 top-3 w-full border-b-2 border-gray-200" />
@@ -56,8 +96,8 @@ export default function Login() {
           </div>
           {/* login with social end */}
           <p className="mt-4 text-gray-600 text-center">
-            Don't have an account? <a href="register.html" className="text-primary">Register Now
-            </a>
+            Don't have an account? <Link to={'/register'} className="text-primary">Register Now
+            </Link>
           </p>
         </div>
       </div>

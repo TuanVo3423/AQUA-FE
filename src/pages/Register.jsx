@@ -1,39 +1,98 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AccountReducer } from '../redux/Reducers/Account';
+import { AccountSelector } from '../redux/Selectors/Account';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const history = useNavigate();
+  const {registerSuccess} = useSelector(AccountSelector);
+  
+  useEffect(() => {
+      if(registerSuccess){
+        history('/login');
+      }
+  },[registerSuccess]);
+  const dispath = useDispatch();
+  const [dataInput, setDataInput] = useState({
+    username : '',
+    fullname :'',
+    email : '',
+    password : '',
+    confirmPassword : '',
+  });
+  const handleSubmit = () => {
+    dispath(AccountReducer.actions.registerRequest(dataInput));
+  }
+  const handleTypeUserName = (e) => {
+    setDataInput({
+      ...dataInput,
+      username : e.target.value,
+    })
+  };
+  const handleTypeFullName = (e) => {
+    setDataInput({
+      ...dataInput,
+      fullname : e.target.value,
+    })
+  };
+  const handleTypeEmail = (e) => {
+    setDataInput({
+      ...dataInput,
+      email : e.target.value,
+    })
+  };
+  const handleTypePassword = (e) => {
+    setDataInput({
+      ...dataInput,
+      password : e.target.value,
+    })
+    };
+    const handleTypeConfirmPassword = (e) => {
+      setDataInput({
+        ...dataInput,
+        confirmPassword : e.target.value,
+      });
+  };
   return (
     <div>
           <div className="container py-16">
             <div className="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
               <h2 className="text-2xl uppercase font-medium mb-1">
-                create an acocunt
+                create an account
               </h2>
               <p className="text-gray-600 mb-6 text-sm">
                 Register here if you don't have account
               </p>
-              <form action>
+              <div>
                 <div className="space-y-4">
+                <div>
+                    <label className="text-gray-600 mb-2 block">
+                      UserName <span className="text-primary">*</span>
+                    </label>
+                    <input onChange={handleTypeUserName} type="text" className="input-box" placeholder="JohnDoe" />
+                  </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">
                       Full Name <span className="text-primary">*</span>
                     </label>
-                    <input type="text" className="input-box" placeholder="John Doe" />
+                    <input onChange={handleTypeFullName} type="text" className="input-box" placeholder="John Doe" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">
                       Email Address <span className="text-primary">*</span>
                     </label>
-                    <input  type="email" className="input-box w-full" placeholder="example@mail.com" />
+                    <input onChange={handleTypeEmail}  type="email" className="input-box w-full" placeholder="example@mail.com" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">Password <span className="text-primary">*</span></label>
-                    <input type="password" className="input-box" placeholder="type password" />
+                    <input onChange={handleTypePassword} type="password" className="input-box" placeholder="type password" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">Confirm Password 
                       <span className="text-primary">*</span>
                     </label>
-                    <input type="password" className="input-box" placeholder="confirm your password" />
+                    <input onChange={handleTypeConfirmPassword} type="password" className="input-box" placeholder="confirm your password" />
                   </div>
                 </div>
                 <div className="flex items-center mt-6">
@@ -44,11 +103,11 @@ export default function Register() {
                   </label>
                 </div>
                 <div className="mt-4">
-                  <button type="submit" className="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
+                  <button onClick={handleSubmit} className="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
                     create account
                   </button>
                 </div>
-              </form>
+              </div>
               {/* login with social */}
               <div className="mt-6 flex justify-center relative">
                 <div className="absolute left-0 top-3 w-full border-b-2 border-gray-200" />

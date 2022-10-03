@@ -5,6 +5,8 @@ import Slider from 'react-slick';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 import {useViewport} from '../hooks/useViewPort';
 import {motion} from 'framer-motion';
+import { useSelector } from 'react-redux';
+import { ProductSelector } from '../redux/Selectors/Product';
 
 const data = [1,2,3,4,5,6,7];
 function SampleNextArrow(props) {
@@ -42,6 +44,11 @@ function SamplePrevArrow(props) {
 
 export default function NewArrival() {
   const {isDesktop} = useViewport();
+  const {data} = useSelector(ProductSelector);
+  const dataArrival =  data.filter((item,index) => {
+      return item.isNew === true;
+  });
+  console.log('dataArrival', dataArrival)
   const settings = {
     dots: true,
     infinite: true,
@@ -59,7 +66,7 @@ export default function NewArrival() {
           </div>
             <div>
           <Slider {...settings}>
-          {data.map((item,index) => <CardProduct key={item} />)}
+          {dataArrival.map((item,index) => <CardProduct key={index} name={item?.name} price={item?.price} img={item?.attachment} likecount={item?.likeCount} />)}
           </Slider>
         </div>
     </div>

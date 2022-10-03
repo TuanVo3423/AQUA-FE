@@ -1,12 +1,12 @@
-import { HeartStraight, MagnifyingGlassPlus } from 'phosphor-react'
+import { Heart, HeartStraight, HeartStraightBreak, MagnifyingGlassPlus, Star } from 'phosphor-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function ProductHot() {
+export default function ProductHot({name,price,img,likecount}) {
   return (
-    <div className="group rounded mx-2 bg-white shadow h-full overflow-hidden">
-    <div className="relative h-[79%]">
-        <img src="./images/products/product1.jpg" className="w-full h-full"></img>
+    <div className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-full overflow-hidden">
+    <div className="relative h-[73%]">
+        <img src={img} className="w-full h-full object-contain"></img>
         <div
             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
             <a href="view.html"
@@ -22,22 +22,25 @@ export default function ProductHot() {
     <div className="pt-4 pb-3 px-4">
         <Link to={'/detail'} >
             <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                Guyer chair
+                {name}
             </h4>
         </Link>
         <div className="flex items-baseline mb-1 space-x-2">
-            <p className="text-xl text-primary font-roboto font-semibold">$45.00</p>
-            <p className="text-sm text-gray-400 font-roboto line-through">$55.00</p>
+            <p className="text-xl text-primary font-roboto font-semibold">${price}</p>
+            {/* <p className="text-sm text-gray-400 font-roboto line-through">$55.00</p> */}
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-x-2">
             <div className="flex gap-1 text-sm text-yellow-400">
-                <span><i className="fas fa-star"></i></span>
-                <span><i className="fas fa-star"></i></span>
-                <span><i className="fas fa-star"></i></span>
-                <span><i className="fas fa-star"></i></span>
-                <span><i className="fas fa-star"></i></span>
+                <Star size={32} weight="fill" />
+                <Star size={32} weight="fill" />
+                <Star size={32} weight="fill" />
+                <Star size={32} weight="bold" />
+                <Star size={32} weight="bold" />
             </div>
-            <div className="text-xs text-gray-500 ml-3">(150)</div>
+            <div className="flex text-xl text-[#999] font-semibold">
+                <p>({likecount} lượt đánh giá)</p>
+            {/* <Heart size={32} weight="bold" className='text-red-500' /> */}
+            </div>
         </div>
     </div>
     <a href="#"

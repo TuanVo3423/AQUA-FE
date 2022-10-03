@@ -1,14 +1,14 @@
 import { List } from 'phosphor-react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/exports';
 import { createSlice } from '@reduxjs/toolkit';
-import { titleIndexNavbar } from '../../redux/Selector';
+import { NavbarSelector } from '../../redux/Selectors/Navbar';
 export const NavbarSlice = createSlice({
     name: 'navbar',
     initialState: {
-        indexTitle : 0,
+        indexTitle : 'Home',
     },
     reducers: {
         setIndexNavbarTitle: (state, action) => {
@@ -47,21 +47,25 @@ const categoryTitle = [
     {
         id : 0,
         title : 'HOME',
+        tab : '/',
         path : '/'
     },
     {
         id : 1,
         title : 'SHOP',
+        tab : '/shop',
         path : '/shop'
     },
     {
         id : 2,
         title : 'ABOUT US',
+        tab : 'AboutMe',
         path : '/about-me'
     },
     {
         id : 3,
         title : 'CONTACT US',
+        tab : 'Contact',
         path : '/contact-me'
     },
 ];
@@ -69,25 +73,26 @@ const categoryTitle02 = [
     {
         id : 4,
         title : 'REGISTER /',
+        tab : 'Register',
         path : '/register'
     },
     {
         id : 5,
         title : 'LOGIN',
+        tab : 'Login',
         path : '/login'
     },
 ];
 
 
 
-export default function Navbar() {
+export default function Navbar({tab}) {
+    const location = useLocation();
     const dispatch = useDispatch();
     // const [hasUser] = useState({
         //     name : 'tuanvo'
         // });
-        const {indexTitle} = useSelector(titleIndexNavbar);
-        console.log('titleIndex',indexTitle);
-  
+    const {indexTitle} = useSelector(NavbarSelector);
     const [hasUser] = useState(false);
 
   return (
@@ -122,7 +127,7 @@ export default function Navbar() {
                 <div className="flex items-center justify-between flex-grow pl-12">
                     <div className="flex items-center space-x-6 text-base capitalize">
                         {categoryTitle.map((item,index) => {
-                           return <Link onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(index))} key={index} to={item.path} className={`text-gray-200 p-2 border-solid font-semibold ${index === indexTitle ? 'border-b-[2px] border-primary ' : ''} hover:text-primary transition`}>{item.title}</Link>
+                           return <Link onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(index))} key={index} to={item.path} className={`text-gray-200 p-2 border-solid font-semibold ${location.pathname === item.path ? 'border-b-[2px] border-primary ' : ''} hover:text-primary transition`}>{item.title}</Link>
 })}
                        
                     </div>
@@ -138,7 +143,7 @@ export default function Navbar() {
                             {categoryTitle02.map((item,index)=> {
                                 return (
                                     <React.Fragment  key={item.id}>
-                                    <Link to={item.path}><p onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(item.id))} className={`ml-auto justify-self-end font-semibold ${item.id === indexTitle ? 'border-b-[2px] border-primary ' : ''} uppercase text-gray-200 hover:text-primary transition`}>{item.title}</p></Link>
+                                    <Link to={item.path}><p onClick={() => dispatch(NavbarSlice.actions.setIndexNavbarTitle(item.id))} className={`ml-auto justify-self-end font-semibold ${location.pathname === item.path ? 'border-b-[2px] border-primary ' : ''} uppercase text-gray-200 hover:text-primary transition`}>{item.title}</p></Link>
                                     </React.Fragment>
                                 )
                             })}

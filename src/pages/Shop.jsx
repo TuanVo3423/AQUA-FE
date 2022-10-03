@@ -2,8 +2,36 @@ import React from 'react';
 import CardProduct from '../components/CardProduct';
 import Breadcrum from '../components/Breadcrum';
 import Navbar from './components/Navbar';
+import { useSelector } from 'react-redux';
+import { ProductSelector } from '../redux/Selectors/Product';
 
+const dataFilter = [
+  {
+    title : 'Laptop',
+  },
+  {
+    title : 'Cellphone',
+  },
+  {
+    title : 'Other',
+  },
+];
+const dataFilterBrand = [
+  {
+    title : 'Apple',
+  },
+  {
+    title : 'Asus',
+  },
+  {
+    title : 'intel',
+  },
+  {
+    title : 'Other',
+  },
+]
 export default function shop({title}) {
+  const {data} = useSelector(ProductSelector);
   return (
     <div>
       {/* <Breadcrum tab={title} /> */}
@@ -19,72 +47,39 @@ export default function shop({title}) {
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
           <div className="space-y-2">
             {/* single category */}
-            <div className="flex items-center">
+            {dataFilter.map((item,index) => {
+              return (
+              <div className="flex items-center">
               <input type="checkbox" id="Bedroom" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Bedroom" className="text-gray-600 ml-3 cursor-pointer">Bedroom</label>
-              <div className="ml-auto text-gray-600 text-sm">(15)</div>
+              <label htmlFor="Bedroom" className="text-gray-600 ml-3 cursor-pointer">{item.title}</label>
+              {/* <div className="ml-auto text-gray-600 text-sm">(15)</div> */}
             </div>
-            {/* single category end */}
-            {/* single category */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Sofa" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Sofa" className="text-gray-600 ml-3 cursor-pointer">Sofa</label>
-              <div className="ml-auto text-gray-600 text-sm">(05)</div>
-            </div>
-            {/* single category end */}
-            {/* single category */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Office" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Office" className="text-gray-600 ml-3 cursor-pointer">Office</label>
-              <div className="ml-auto text-gray-600 text-sm">(09)</div>
-            </div>
-            {/* single category end */}
-            {/* single category */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Outdoor" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Outdoor" className="text-gray-600 ml-3 cursor-pointer">Outdoor</label>
-              <div className="ml-auto text-gray-600 text-sm">(19)</div>
-            </div>
-            {/* single category end */}
+              )
+            })}
           </div>
         </div>
         {/* category filter end */}
         {/* brand filter */}
+
         <div className="pt-4">
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Brands</h3>
           <div className="space-y-2">
             {/* single brand name */}
-            <div className="flex items-center">
+            {dataFilterBrand.map((item,index) => {
+          return (
+          <div key={index} className="flex items-center">
               <input type="checkbox" id="Dominik" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Dominik" className="text-gray-600 ml-3 cursor-pointer">Dominik</label>
-              <div className="ml-auto text-gray-600 text-sm">(15)</div>
+              <label htmlFor="Dominik" className="text-gray-600 ml-3 cursor-pointer">{item.title}</label>
+              {/* <div className="ml-auto text-gray-600 text-sm">(15)</div> */}
             </div>
-            {/* single brand name end */}
-            {/* single brand name */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Karl" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Karl" className="text-gray-600 ml-3 cursor-pointer">Karl</label>
-              <div className="ml-auto text-gray-600 text-sm">(18)</div>
-            </div>
-            {/* single brand name end */}
-            {/* single brand name */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Maxing" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Maxing" className="text-gray-600 ml-3 cursor-pointer">Maxing</label>
-              <div className="ml-auto text-gray-600 text-sm">(09)</div>
-            </div>
-            {/* single brand name end */}
-            {/* single brand name */}
-            <div className="flex items-center">
-              <input type="checkbox" id="Ernest" className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-              <label htmlFor="Ernest" className="text-gray-600 ml-3 cursor-pointer">Ernest</label>
-              <div className="ml-auto text-gray-600 text-sm">(12)</div>
-            </div>
-            {/* single brand name end */}
+          )
+        })}
+            
           </div>
         </div>
         {/* brand filter end */}
         {/* price filter */}
+       
         <div className="pt-4">
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
           <div className="mt-4 flex items-center">
@@ -95,7 +90,7 @@ export default function shop({title}) {
         </div>
         {/* price filter end */}
         {/* size filter */}
-        <div className="pt-4">
+        <div className="pt-4 hidden">
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">size</h3>
           <div className="flex items-center gap-2">
             {/* single size */}
@@ -142,7 +137,7 @@ export default function shop({title}) {
         </div>
         {/* size filter end */}
         {/* color filter */}
-        <div className="pt-4">
+        <div className="pt-4 hidden ">
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">color</h3>
           <div className="flex items-center gap-2">
             {/* single color */}
@@ -197,12 +192,10 @@ export default function shop({title}) {
       {/* sorting end */}
       {/* product wrapper */}
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 gap-6">
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
-            <CardProduct />
+        {data.map((item,index) => {
+          return <CardProduct key={index} name={item.name} price={item.price} img={item.attachment} likecount={item.likeCount} />
+        })}
+            
       </div>
       {/* product wrapper end */}
     </div>

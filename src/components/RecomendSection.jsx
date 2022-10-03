@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 import ProductHot from './ProductHot';
 import { useViewport } from '../hooks/useViewPort';
+import { useSelector } from 'react-redux';
+import { ProductSelector } from '../redux/Selectors/Product';
 const data = [1,2];
 
 function SampleNextArrow(props) {
@@ -39,6 +41,20 @@ function SamplePrevArrow(props) {
 }
 
 export default function RecomendSection() {
+  const {data} = useSelector(ProductSelector);
+  const dataLaptop =  data.filter((item,index) => {
+      return item.category === 'laptop';
+  });
+  const number1 = dataLaptop.length;
+  console.log(number1);
+  const arr = []
+    const number = [1,2];
+  for (var i=0 ; i<number1 ; i+=5){
+    arr.push(dataLaptop.slice(i,i+5));
+  }
+  console.log(arr);
+
+  // const test = dataLaptop
   const {isDesktop} = useViewport();
   const settings = {
     dots: true,
@@ -54,29 +70,29 @@ export default function RecomendSection() {
          <div className='pb-5'>
          <h2 className="inline relative text-2xl md:text-3xl font-medium text-gray-800 uppercase mb-6 after:content-[''] after:block after:absolute after:-right-1/4 after:top-1/2 after:w-[50px] after:h-[4px] after:bg-primary">TOP NEW LAPTOP  </h2>
           </div>
-      
-         
           <Slider {...settings}>
-          {data.map((item,index) => {
-            return (
+          {arr.map((item,index) => {
+           return (
             <div key={item}>
-            <div className="grid lg:grid-cols-4 sm:grid-cols-1 gap-6">
+              {/* [1,2,3,4] */}
+            <div className="grid lg:grid-cols-4 grid-cols-1 gap-6">
             <>
-                <div className='col-span-2 row-span-2 h-full'>
-                      <ProductHot  />
+              <div className='col-span-2 row-span-2 h-full'>
+                      <ProductHot name={item[0]?.name} price={item[0]?.price} img={item[0]?.attachment} likecount={item[0]?.likeCount} />
                 </div>
-                <div className='col-span-1 row-span-1'>
-                      <CardProduct  />
+                <div className='col-span-2 lg:col-span-1 row-span-1'>
+                    <CardProduct name={item[1]?.name} price={item[1]?.price} img={item[1]?.attachment} likecount={item[1]?.likeCount} />
                 </div>
-                <div className='col-span-1 row-span-1'>
-                      <CardProduct  />
+                <div className='col-span-2 lg:col-span-1 row-span-1'>
+                    <CardProduct name={item[2]?.name} price={item[2]?.price} img={item[2]?.attachment} likecount={item[2]?.likeCount} />
                 </div>
-                <div className='col-span-1 row-span-1'>
-                      <CardProduct  />
+                <div className='col-span-2 lg:col-span-1 row-span-1'>
+                    <CardProduct name={item[3]?.name} price={item[3]?.price} img={item[3]?.attachment} likecount={item[3]?.likeCount} />
                 </div>
-                <div className='col-span-1 row-span-1'>
-                      <CardProduct  />
+                <div className='col-span-2 lg:col-span-1 row-span-1'>
+                    <CardProduct name={item[4]?.name} price={item[4]?.price} img={item[4]?.attachment} likecount={item[4]?.likeCount} />
                 </div>
+                
                 </>
            
           </div>
