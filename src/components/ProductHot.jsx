@@ -1,8 +1,14 @@
 import { Heart, HeartStraight, HeartStraightBreak, MagnifyingGlassPlus, Star } from 'phosphor-react'
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { DetailReducer } from '../redux/Reducers/Detail';
 
-export default function ProductHot({name,price,img,likecount}) {
+export default function ProductHot({name,price,img,likecount,_id}) {
+    const dispatch = useDispatch();
+    const handleSeeDetail = () => {
+        dispatch(DetailReducer.actions.setIDDetail(_id));
+    }
   return (
     <div className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-full overflow-hidden">
     <div className="relative h-[73%]">
@@ -20,7 +26,7 @@ export default function ProductHot({name,price,img,likecount}) {
         </div>
     </div>
     <div className="pt-4 pb-3 px-4">
-        <Link to={'/detail'} >
+        <Link to={'/detail'} onClick={handleSeeDetail} >
             <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
                 {name}
             </h4>

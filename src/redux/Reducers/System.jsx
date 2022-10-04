@@ -15,7 +15,10 @@ export const SystemReducer = createSlice({
             state.typeAlert = action.payload.type;
         },
         reset : (state,action) => {
-            state = state.initialState;
+            state.isLoading = true;
+            state.isError = false;
+            state.MessageAlert = undefined;
+            state.typeAlert = undefined;
         },
         setIsLoading : (state,action) => {
             state.isLoading = action.payload;

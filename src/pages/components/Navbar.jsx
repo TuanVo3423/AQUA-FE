@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/exports';
 import { createSlice } from '@reduxjs/toolkit';
 import { NavbarSelector } from '../../redux/Selectors/Navbar';
+import { AccountSelector } from '../../redux/Selectors/Account';
 export const NavbarSlice = createSlice({
     name: 'navbar',
     initialState: {
@@ -89,6 +90,7 @@ const categoryTitle02 = [
 export default function Navbar({tab}) {
     const location = useLocation();
     const dispatch = useDispatch();
+    const {loginSuccess} = useSelector(AccountSelector);
     // const [hasUser] = useState({
         //     name : 'tuanvo'
         // });
@@ -139,7 +141,7 @@ export default function Navbar({tab}) {
                         </a>
                         </div>
                     ) : (
-                        <div className='flex text-white gap-x-2'>
+                        <div className={`flex text-white gap-x-2 ${loginSuccess && 'hidden'}`}>
                             {categoryTitle02.map((item,index)=> {
                                 return (
                                     <React.Fragment  key={item.id}>

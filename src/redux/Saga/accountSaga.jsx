@@ -8,18 +8,21 @@ import * as api from '../../api';
 function* registerSaga (action){
     try {
         // yield put(SystemReducer.actions.setNoError());
+        yield put(SystemReducer.actions.reset());
         const registerAccount = yield call(api.register , action.payload);
         // put này dùng để dispatch 1 actions đến thằng reducer
         yield put(AccountReducer.actions.registerSuccess(registerAccount.data));
+        yield put(SystemReducer.actions.setIsLoading(false));
         // set message success
     } catch (error) {
         yield put(SystemReducer.actions.setMessageAlert({...error.response.data,kind : true}));
+        yield put(SystemReducer.actions.setIsLoading(false));
     }
 }
 
 function* loginSaga (action){
     try {
-        yield put(SystemReducer.actions.setIsLoading(true));
+        yield put(SystemReducer.actions.reset());
         const cookies = new Cookies();
         const loginAccount = yield call(api.login , action.payload);
         yield cookies.set('token',loginAccount.data.accesstoken,{ path: '/' });
@@ -29,6 +32,7 @@ function* loginSaga (action){
         
     } catch (error) {
         // message , type
+        console.log(error.response.data);
         yield put(SystemReducer.actions.setIsLoading(false));
         yield put(SystemReducer.actions.setMessageAlert({...error.response.data,kind : true}));
     }
@@ -40,6 +44,7 @@ function* SignOutSaga (action){
         yield cookies.remove('token');
         const logoutAccount = yield call(api.logout , action.payload);
         yield put(AccountReducer.actions.signOutSuccess());
+        yield put(SystemReducer.actions.reset());
         // yield put(SystemReducer.actions.setMessageAlert({...logoutAccount.data,kind : false}));
     } catch (error) {
         // message , type

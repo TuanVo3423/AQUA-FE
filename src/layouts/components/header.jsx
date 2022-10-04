@@ -14,16 +14,19 @@ const data = [
         title : 'Category',
         icon : DotsThreeCircle,
         isActive : false,
+        path : '/shop'
     },
     {
         title : 'Search',
         icon : MagnifyingGlassPlus,
         isActive : false,
+        path : '/',
     },
     {
         title : 'Cart', 
         icon : ShoppingCart,
         isActive : false,
+        path : '/cart',
     },
     
 ]
@@ -36,13 +39,13 @@ export default function Header() {
          <header className="flex shadow-sm bg-primary h-[80px] lg:bg-white">
         <div className="container flex items-center justify-between">
             {/* <!-- logo --> */}
-            <Link to={'/'} className="lg:block w-32 h-16">
+            <Link to={'/'} className="lg:block md:w-32 md:h-16 w-16 h-8">
                 <img src="./images/logo.png" alt="logo" className="w-full h-full object-cover"></img>
             </Link>
             {/* <!-- logo end --> */}
 
     <div
-        className="fixed w-full border-t border-gray-200 shadow-sm bg-white py-3 bottom-0 left-0 flex justify-around items-start px-6 lg:hidden z-40">
+        className="fixed w-full border-t border-gray-200 shadow-sm text-white bg-white py-3 bottom-0 left-0 flex justify-around items-start px-6 lg:hidden z-40">
         
         {data.map((item,index) => 
             {
@@ -59,10 +62,10 @@ export default function Header() {
                 else {
                     return (
                         <React.Fragment key={index}>
-                        <a  href="#" className="flex flex-col justify-center items-center text-center text-gray-700 hover:text-primary transition relative">
+                        <Link to={item.path} className="flex flex-col justify-center items-center text-center text-gray-700 hover:text-primary transition relative">
                         <item.icon size={32} />
                         <p className="text-xs leading-3">{item.title}</p>
-                        </a>
+                        </Link>
 
                         </React.Fragment>
                     )
@@ -123,19 +126,19 @@ export default function Header() {
 
             {/* <!-- navicons --> */}
             <div className="space-x-4 flex items-center">
-                <Link to={'/wishlist'} className="text-center flex flex-col justify-center items-center text-gray-700 hover:text-primary transition relative">
+                <Link to={'/wishlist'} className="text-center flex flex-col justify-center items-center text-gray-700 md:hover:text-primary hover:text-white transition relative">
                     <span
-                        className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">5</span>
+                        className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary md:hover:text-primary text-white text-xs">5</span>
                             <HeartStraight size={24} weight="bold" />
                     <p className="text-xs leading-3">Wish List</p>
                 </Link>
-                <Link to={'/cart'} className="text-center flex flex-col justify-center items-center text-gray-700 hover:text-primary transition relative">
+                <Link to={'/cart'} className="text-center flex flex-col justify-center items-center text-gray-700 md:hover:text-primary hover:text-white transition relative">
                     <span
                         className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">5</span>
                             <ShoppingCart size={24} weight="bold" />
                     <p className="text-xs leading-3">Your Cart</p>
                 </Link>
-                <Link to={'/account'} className="text-center flex flex-col justify-center items-center text-gray-700 hover:text-primary transition relative">
+                <Link to={'/account'} className="text-center flex flex-col justify-center items-center text-gray-700 md:hover:text-primary hover:text-white transition relative">
                     <span
                         className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">0</span>
                             <UserCircle size={24} weight="bold" />

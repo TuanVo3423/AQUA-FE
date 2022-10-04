@@ -17,6 +17,7 @@ export const AccountReducer = createSlice({
             state.username = action.payload.username;
             state.loginSuccess = true;
             state.userID = action.payload.id;
+            state.email = action.payload.email;
         },
         setAccessToken : (state,action) => {
             state.AccessToken = action.payload;

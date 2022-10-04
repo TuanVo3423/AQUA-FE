@@ -3,8 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AccountReducer } from '../redux/Reducers/Account';
 import { AccountSelector } from '../redux/Selectors/Account';
 import { useNavigate } from 'react-router-dom';
-
+import { SystemReducer } from '../redux/Reducers/System';
 export default function Register() {
+  // const [message, setMessage] = useState('');
+  const [error, setError] = useState({
+    message : '',
+    isError : false,
+    type1 : '',
+    type2 : '',
+  });
+  console.log('error : ',error);
   const history = useNavigate();
   const {registerSuccess} = useSelector(AccountSelector);
   
@@ -21,8 +29,29 @@ export default function Register() {
     password : '',
     confirmPassword : '',
   });
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
   const handleSubmit = () => {
-    dispath(AccountReducer.actions.registerRequest(dataInput));
+    if(!isValidEmail(dataInput.email)){
+      setError({
+        ...error,
+        message : 'Invalid email address',
+        isError : true,
+        type1 : 'email',
+      });
+    }
+    else if(dataInput.password !== dataInput.confirmPassword){
+      setError({
+        ...error,
+        message : 'Please enter a password and confirm password has same value',
+        isError : true,
+        type2 : 'confirm',
+      });
+    }
+    else {
+      dispath(AccountReducer.actions.registerRequest(dataInput));
+    }
   }
   const handleTypeUserName = (e) => {
     setDataInput({
@@ -83,6 +112,9 @@ export default function Register() {
                       Email Address <span className="text-primary">*</span>
                     </label>
                     <input onChange={handleTypeEmail}  type="email" className="input-box w-full" placeholder="example@mail.com" />
+                    {error.isError && error.type1 === 'email' && (
+                      <p className='text-red-400 text-sm font-bold underline'>{error.message}</p>
+                    )}
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">Password <span className="text-primary">*</span></label>
@@ -93,6 +125,9 @@ export default function Register() {
                       <span className="text-primary">*</span>
                     </label>
                     <input onChange={handleTypeConfirmPassword} type="password" className="input-box" placeholder="confirm your password" />
+                    {error.isError && error.type2 === 'confirm' && (
+                      <p className='text-red-400 text-sm font-bold underline'>{error.message}</p>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center mt-6">

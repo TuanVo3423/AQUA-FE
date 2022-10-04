@@ -193,7 +193,7 @@ export default function shop({title}) {
       {/* product wrapper */}
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 gap-6">
         {data.map((item,index) => {
-          return <CardProduct key={index} name={item.name} price={item.price} img={item.attachment} likecount={item.likeCount} />
+          return <CardProduct key={index}  _id={item?._id} name={item.name} price={item.price} img={item.attachment} likecount={item.likeCount} />
         })}
             
       </div>

@@ -66,7 +66,7 @@ export default function NewArrival() {
           </div>
             <div>
           <Slider {...settings}>
-          {dataArrival.map((item,index) => <CardProduct key={index} name={item?.name} price={item?.price} img={item?.attachment} likecount={item?.likeCount} />)}
+          {dataArrival.map((item,index) => <CardProduct key={index} _id={item?._id} name={item?.name} price={item?.price} img={item?.attachment} likecount={item?.likeCount} />)}
           </Slider>
         </div>
     </div>

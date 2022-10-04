@@ -83,7 +83,7 @@ export default function Banner() {
         className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
         <div className="container">
             <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-                Best Collection For 
+                Smartphone 
             </h1>
             <p className="text-base text-white leading-6">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 

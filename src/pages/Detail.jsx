@@ -1,16 +1,32 @@
-import React from 'react';
+import { FacebookLogo, InstagramLogo, Star, TwitterLogo } from 'phosphor-react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import CardProduct from '../components/CardProduct';
+import { DetailSelector } from '../redux/Selectors/Detail';
+import { ProductSelector } from '../redux/Selectors/Product';
 
 export default function Detail() {
+  const {idDetail} = useSelector(DetailSelector);
+  const {data} = useSelector(ProductSelector);
+  const dataDetail =  data.filter((item,index) => {
+      return item._id === idDetail;
+  });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[idDetail])
+  const dataRelated = data.filter((item,index) => {
+      return item.category === dataDetail[0].category;
+  })
+  console.log('dataDetail : ',dataDetail , dataDetail[0].category,dataRelated);
   return (
     <div>
         <div className="container pt-4 pb-6 grid lg:grid-cols-2 gap-6">
         {/* product image */}
         <div>
           <div>
-            <img id="main-img" src="./images/products/product9.jpg" className="w-full" />
+            <img id="main-img" src={dataDetail[0].attachment} className="w-full" />
           </div>
-          <div className="grid grid-cols-5 gap-4 mt-4">
+          {/* <div className="grid grid-cols-5 gap-4 mt-4">
             <div>
               <img src="./images/products/product9.jpg" className="single-img w-full cursor-pointer border border-primary" />
             </div>
@@ -26,21 +42,21 @@ export default function Detail() {
             <div>
               <img src="./images/products/product11.jpg" className="single-img w-full cursor-pointer border" />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* product image end */}
         {/* product content */}
         <div>
-          <h2 className="md:text-3xl text-2xl font-medium uppercase mb-2">Italian L Shape Sofa</h2>
+          <h2 className="md:text-3xl text-2xl font-medium uppercase mb-2">{dataDetail[0].name}</h2>
           <div className="flex items-center mb-4">
             <div className="flex gap-1 text-sm text-yellow-400">
-              <span><i className="fas fa-star" /></span>
-              <span><i className="fas fa-star" /></span>
-              <span><i className="fas fa-star" /></span>
-              <span><i className="fas fa-star" /></span>
-              <span><i className="fas fa-star" /></span>
+            <Star size={16} weight="fill" />
+            <Star size={16} weight="fill" />
+            <Star size={16} weight="fill" />
+            <Star size={16} weight="bold" />
+            <Star size={16} weight="bold" />
             </div>
-            <div className="text-xs text-gray-500 ml-3">(150 Reviews)</div>
+            <div className="text-xs text-gray-500 ml-3">({dataDetail[0].likeCount} Reviews)</div>
           </div>
           <div className="space-y-2">
             <p className="text-gray-800 font-semibold space-x-2">
@@ -48,72 +64,18 @@ export default function Detail() {
               <span className="text-green-600">In Stock</span>
             </p>
             <p className="space-x-2">
-              <span className="text-gray-800 font-semibold">Brand: </span>
-              <span className="text-gray-600">Apex</span>
-            </p>
-            <p className="space-x-2">
               <span className="text-gray-800 font-semibold">Category: </span>
-              <span className="text-gray-600">Sofa</span>
-            </p>
-            <p className="space-x-2">
-              <span className="text-gray-800 font-semibold">SKU: </span>
-              <span className="text-gray-600">BE45VGRT</span>
+              <span className="text-gray-600">{dataDetail[0].category}</span>
             </p>
           </div>
           <div className="mt-4 flex items-baseline gap-3">
-            <span className="text-primary font-semibold text-xl">$450.00</span>
-            <span className="text-gray-500 text-base line-through">$500.00</span>
+            <span className="text-primary font-semibold text-xl">${dataDetail[0].price}</span>
+            {/* <span className="text-gray-500 text-base line-through">$500.00</span> */}
           </div>
           <p className="mt-4 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim exercitationem quaerat excepturi
-            labore blanditiis
+            {dataDetail[0].shortDescription}
           </p>
           {/* size */}
-          <div className="mt-4">
-            <h3 className="text-base text-gray-800 mb-1">Size</h3>
-            <div className="flex items-center gap-2">
-              {/* single size */}
-              <div className="size-selector">
-                <input type="radio" name="size" className="hidden" id="size-xs" />
-                <label htmlFor="size-xs" className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">
-                  XS
-                </label>
-              </div>
-              {/* single size end */}
-              {/* single size */}
-              <div className="size-selector">
-                <input type="radio" name="size" className="hidden" id="size-s" />
-                <label htmlFor="size-s" className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">
-                  S
-                </label>
-              </div>
-              {/* single size end */}
-              {/* single size */}
-              <div className="size-selector">
-                <input type="radio" name="size" className="hidden" id="size-m" defaultChecked />
-                <label htmlFor="size-m" className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">
-                  M
-                </label>
-              </div>
-              {/* single size end */}
-              {/* single size */}
-              <div className="size-selector">
-                <input type="radio" name="size" className="hidden" id="size-l" />
-                <label htmlFor="size-l" className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">
-                  L
-                </label>
-              </div>
-              {/* single size end */}
-              {/* single size */}
-              <div className="size-selector">
-                <input type="radio" name="size" className="hidden" id="size-xl" />
-                <label htmlFor="size-xl" className="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600">
-                  XL
-                </label>
-              </div>
-              {/* single size end */}
-            </div>
-          </div>
           {/* size end */}
           {/* color */}
           <div className="mt-4">
@@ -167,15 +129,9 @@ export default function Detail() {
           {/* add to cart button end */}
           {/* product share icons */}
           <div className="flex space-x-3 mt-4">
-            <a href="#" className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-              <i className="fab fa-facebook-f" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-              <i className="fab fa-twitter" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
-              <i className="fab fa-instagram" />
-            </a>
+          <FacebookLogo size={32} weight="fill" className='text-primary' />
+          <TwitterLogo size={32} weight="bold" className='text-primary'/>
+          <InstagramLogo size={32} weight="fill" className='text-primary'/>
           </div>
           {/* product share icons end */}
         </div>
@@ -193,20 +149,9 @@ export default function Detail() {
         <div className="lg:w-4/5 xl:w-3/5 pt-6">
           <div className="space-y-3 text-gray-600">
             <p>
-              Incredible graphics performanceMacBook Air can take on more graphics-intensive projects than
-              ever. For the first time, content creators can edit and seamlessly play back multiple streams of
-              full‑quality 4K video without dropping a frame.
+              {dataDetail[0].detailDescription}
             </p>
-            <p>
-              Incredible graphics performanceMacBook Air can take on more graphics-intensive projects than
-              ever. For the first time, content creators can edit and seamlessly play back multiple streams of
-              full‑quality 4K video without dropping a frame.
-            </p>
-            <p>
-              Apps on MacBook Air can use machine learning (ML) to automatically retouch photos like a pro,
-              make smart tools such as magic wands and audio filters more accurate at auto‑detection, and so
-              much more. That’s not just brain power — that’s the power of a full stack of ML technologies.
-            </p>
+           
           </div>
           {/* details table */}
           <table className="table-auto border-collapse w-full text-left text-gray-600 text-sm mt-6">
@@ -218,10 +163,10 @@ export default function Detail() {
                 <th className="py-2 px-4 border border-gray-300 w-40 font-medium">Material</th>
                 <td className="py-2 px-4 border border-gray-300">Artificial Leather</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <th className="py-2 px-4 border border-gray-300 w-40 font-medium">Weight</th>
                 <td className="py-2 px-4 border border-gray-300">55kg</td>
-              </tr>
+              </tr> */}
             </tbody></table>
           {/* details table */}
         </div>
@@ -235,10 +180,11 @@ export default function Detail() {
         {/* product wrapper */}
         <div className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
           {/* single product */}
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
-                <CardProduct />
+          {dataRelated.map((item,index) => {
+            if(index < 4 && item._id !== idDetail){
+              return <CardProduct _id={item?._id} key={index} name={item?.name} price={item?.price} img={item?.attachment} likecount={item?.likeCount} />
+            }
+          })}
         </div>
         {/* product wrapper end */}
       </div>

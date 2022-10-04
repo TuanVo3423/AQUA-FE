@@ -1,8 +1,13 @@
 import { AddressBook, CreditCard, Gift, HeartStraight, SignOut, Trash } from 'phosphor-react';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { AccountSelector } from '../redux/Selectors/Account';
+import { ProductSelector } from '../redux/Selectors/Product';
 
 
 export default function Wishlist() {
+  const {username,fullname,email} = useSelector(AccountSelector);
+  const {data} = useSelector(ProductSelector);
   return (
     <div>
            <div className="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
@@ -15,7 +20,7 @@ export default function Wishlist() {
             </div>
             <div>
               <p className="text-gray-600">Hello,</p>
-              <h4 className="text-gray-800 capitalize font-medium">Russell Ahmed</h4>
+              <h4 className="text-gray-800 capitalize font-medium">{username}</h4>
             </div>
           </div>
           {/* account profile end */}
@@ -88,22 +93,25 @@ export default function Wishlist() {
         {/* account content */}
         <div className="col-span-9 mt-6 lg:mt-0 space-y-4">
           {/* single wishlist */}
-          <div className="flex items-center md:justify-between gap-4 md:gap-6 p-4 border border-gray-200 rounded flex-wrap md:flex-nowrap">
+          {data.map((item,index) => {
+            if(index < 4){
+              return (
+                <div className="flex items-center md:justify-between gap-4 md:gap-6 p-4 border border-gray-200 rounded flex-wrap md:flex-nowrap">
             {/* cart image */}
             <div className="md:w-28 w-full flex-shrink-0">
-              <img src="images/products/product9.jpg" className="w-full" />
+              <img src={item?.attachment} className="w-full" />
             </div>
             {/* cart image end */}
             {/* cart content */}
             <div className="md:w-1/3 w-full">
               <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
-                Italian L Shape Sofa
+                {item?.name}
               </h2>
               <p className="text-gray-500 text-sm">Availability: <span className="text-green-600">In Stock</span></p>
             </div>
             {/* cart content end */}
             <div>
-              <p className="text-primary text-lg font-semibold">$320.00</p>
+              <p className="text-primary text-lg font-semibold">${item?.price}</p>
             </div>
             <a href="#" className="ml-auto md:ml-0 block px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
               Add to cart
@@ -112,54 +120,9 @@ export default function Wishlist() {
             <Trash size={24} weight="bold" />
             </div>
           </div>
-          <div className="flex items-center md:justify-between gap-4 md:gap-6 p-4 border border-gray-200 rounded flex-wrap md:flex-nowrap">
-            {/* cart image */}
-            <div className="md:w-28 w-full flex-shrink-0">
-              <img src="images/products/product9.jpg" className="w-full" />
-            </div>
-            {/* cart image end */}
-            {/* cart content */}
-            <div className="md:w-1/3 w-full">
-              <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
-                Italian L Shape Sofa
-              </h2>
-              <p className="text-gray-500 text-sm">Availability: <span className="text-green-600">In Stock</span></p>
-            </div>
-            {/* cart content end */}
-            <div>
-              <p className="text-primary text-lg font-semibold">$320.00</p>
-            </div>
-            <a href="#" className="ml-auto md:ml-0 block px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
-              Add to cart
-            </a>
-            <div className="text-gray-600 hover:text-primary cursor-pointer">
-            <Trash size={24} weight="bold" />
-            </div>
-          </div>
-          <div className="flex items-center md:justify-between gap-4 md:gap-6 p-4 border border-gray-200 rounded flex-wrap md:flex-nowrap">
-            {/* cart image */}
-            <div className="md:w-28 w-full flex-shrink-0">
-              <img src="images/products/product9.jpg" className="w-full" />
-            </div>
-            {/* cart image end */}
-            {/* cart content */}
-            <div className="md:w-1/3 w-full">
-              <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
-                Italian L Shape Sofa
-              </h2>
-              <p className="text-gray-500 text-sm">Availability: <span className="text-green-600">In Stock</span></p>
-            </div>
-            {/* cart content end */}
-            <div>
-              <p className="text-primary text-lg font-semibold">$320.00</p>
-            </div>
-            <a href="#" className="ml-auto md:ml-0 block px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
-              Add to cart
-            </a>
-            <div className="text-gray-600 hover:text-primary cursor-pointer">
-            <Trash size={24} weight="bold" />
-            </div>
-          </div>
+              )
+            }
+          })}
           {/* single wishlist end */}
         </div>
         {/* account content end */}

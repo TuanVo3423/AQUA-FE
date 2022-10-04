@@ -1,8 +1,14 @@
 import React from 'react';
 import {MagnifyingGlassPlus,HeartStraight, Star} from 'phosphor-react';
 import { Link } from 'react-router-dom';
+import { DetailReducer } from '../redux/Reducers/Detail';
+import { useDispatch } from 'react-redux';
 
 export default function CardProduct({name,price,img,likecount,_id}) {
+    const dispatch = useDispatch();
+    const handleSeeDetail = () => {
+        dispatch(DetailReducer.actions.setIDDetail(_id));
+    }
   return (
         <div test={_id} className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-[450px] overflow-hidden ">
                     <div className="relative">  
@@ -20,7 +26,7 @@ export default function CardProduct({name,price,img,likecount,_id}) {
                         </div>
                     </div>
                     <div className="pt-4 pb-3 px-4">
-                        <Link to={'/detail'} >
+                        <Link to={'/detail'} onClick={handleSeeDetail} >
                             <h4
                             className="uppercase font-medium text-xl mb-2 text-gray-800 truncate hover:text-primary transition">
                                 {name}

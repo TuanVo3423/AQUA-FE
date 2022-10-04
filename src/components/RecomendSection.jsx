@@ -78,19 +78,19 @@ export default function RecomendSection() {
             <div className="grid lg:grid-cols-4 grid-cols-1 gap-6">
             <>
               <div className='col-span-2 row-span-2 h-full'>
-                      <ProductHot name={item[0]?.name} price={item[0]?.price} img={item[0]?.attachment} likecount={item[0]?.likeCount} />
+                      <ProductHot name={item[0]?.name}  _id={item[0]?._id} price={item[0]?.price} img={item[0]?.attachment} likecount={item[0]?.likeCount} />
                 </div>
                 <div className='col-span-2 lg:col-span-1 row-span-1'>
-                    <CardProduct name={item[1]?.name} price={item[1]?.price} img={item[1]?.attachment} likecount={item[1]?.likeCount} />
+                    <CardProduct name={item[1]?.name} _id={item[1]?._id} price={item[1]?.price} img={item[1]?.attachment} likecount={item[1]?.likeCount} />
                 </div>
                 <div className='col-span-2 lg:col-span-1 row-span-1'>
-                    <CardProduct name={item[2]?.name} price={item[2]?.price} img={item[2]?.attachment} likecount={item[2]?.likeCount} />
+                    <CardProduct name={item[2]?.name} _id={item[2]?._id} price={item[2]?.price} img={item[2]?.attachment} likecount={item[2]?.likeCount} />
                 </div>
                 <div className='col-span-2 lg:col-span-1 row-span-1'>
-                    <CardProduct name={item[3]?.name} price={item[3]?.price} img={item[3]?.attachment} likecount={item[3]?.likeCount} />
+                    <CardProduct name={item[3]?.name} _id={item[3]?._id} price={item[3]?.price} img={item[3]?.attachment} likecount={item[3]?.likeCount} />
                 </div>
                 <div className='col-span-2 lg:col-span-1 row-span-1'>
-                    <CardProduct name={item[4]?.name} price={item[4]?.price} img={item[4]?.attachment} likecount={item[4]?.likeCount} />
+                    <CardProduct name={item[4]?.name} _id={item[4]?._id} price={item[4]?.price} img={item[4]?.attachment} likecount={item[4]?.likeCount} />
                 </div>
                 
                 </>

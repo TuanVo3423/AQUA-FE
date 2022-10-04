@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AccountSelector } from '../redux/Selectors/Account';
 import { AccountReducer } from '../redux/Reducers/Account';
 export default function Account() {
   const [choice , setChoice] = useState();
+  const {username,fullname,email} = useSelector(AccountSelector);
   const dispatch = useDispatch();
   const handleSigout = async() => {
     await dispatch(AccountReducer.actions.signOutRequest());
@@ -21,7 +23,7 @@ export default function Account() {
             </div>
             <div>
               <p className="text-gray-600">Hello,</p>
-              <h4 className="text-gray-800 capitalize font-medium">vantuan</h4>
+              <h4 className="text-gray-800 capitalize font-medium">{username}</h4>
             </div>
           </div>
           {/* account profile end */}
@@ -97,8 +99,8 @@ export default function Account() {
               <a href="#" className="text-primary">Edit</a>
             </div>
             <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">vantuan</h4>
-              <p className="text-gray-800">example@mail.com</p>
+              <h4 className="text-gray-700 font-medium">{username}</h4>
+              <p className="text-gray-800">{email}</p>
               <p className="text-gray-800">(123) 456-789</p>
             </div>
           </div>
@@ -110,9 +112,9 @@ export default function Account() {
               <a href="#" className="text-primary">Edit</a>
             </div>
             <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">vantuan</h4>
-              <p className="text-gray-800">3891 Ranchview Dr.</p>
-              <p className="text-gray-800">Richardson, Califora</p>
+              <h4 className="text-gray-700 font-medium">{username}</h4>
+              <p className="text-gray-800">38 Tran Dai Nghia</p>
+              <p className="text-gray-800">Ngu Hoang Son, Da Nang City</p>
               <p className="text-gray-800">(123) 456-789</p>
             </div>
           </div>
@@ -124,9 +126,9 @@ export default function Account() {
               <a href="#" className="text-primary">Edit</a>
             </div>
             <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">vantuan</h4>
-              <p className="text-gray-800">3891 Ranchview Dr.</p>
-              <p className="text-gray-800">Richardson, Califora</p>
+              <h4 className="text-gray-700 font-medium">{username}</h4>
+              <p className="text-gray-800">38 Tran Dai Nghia</p>
+              <p className="text-gray-800">Ngu Hoang Son, Da Nang City</p>
               <p className="text-gray-800">(123) 456-789</p>
             </div>
           </div>
