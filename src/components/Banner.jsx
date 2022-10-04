@@ -81,7 +81,7 @@ export default function Banner() {
     <Slider {...settings}>
     <div
         
-        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('./images/banner-01.png')]">
+        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('../images/banner-01.png')]">
         <div className="container w-1/2">
             <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
             AQUA E-COMMERCE
@@ -97,7 +97,7 @@ export default function Banner() {
     </div>
     <div
         
-        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('./images/banner-02.png')]">
+        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('../images/banner-02.png')]">
         <div className="container w-1/2">
             <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
             YOUR NEW SUPERPOWER.
