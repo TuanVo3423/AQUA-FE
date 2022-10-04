@@ -10,10 +10,8 @@ import AdMobile from '../components/AdMobile';
 import RecomendSection from '../components/RecomendSection';
 import MobileArrival from '../components/MobileArrival';
 import Feature2 from '../components/Feature2';
-import { ArrowFatUp, NavigationArrow } from 'phosphor-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AccountSelector } from '../redux/Selectors/Account';
-import { ProductReducer } from '../redux/Reducers/Product';
+import DataDonation from '../components/test';
+
 export default function home() {
   return (
     <div>
@@ -23,7 +21,8 @@ export default function home() {
         <NewArrival />
         <Adsection />
         <RecomendSection />
-        <AdMobile />
+        {/* <AdMobile /> */}
+        <DataDonation />
         <MobileArrival />
        
     </div>  

@@ -10,7 +10,7 @@ export default function ProductHot({name,price,img,likecount,_id}) {
         dispatch(DetailReducer.actions.setIDDetail(_id));
     }
   return (
-    <div className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-full overflow-hidden">
+    <div className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-full overflow-hidden cursor-pointer">
     <div className="relative h-[73%]">
         <img src={img} className="w-full h-full object-contain"></img>
         <div

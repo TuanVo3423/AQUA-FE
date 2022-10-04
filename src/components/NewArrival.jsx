@@ -7,6 +7,7 @@ import {useViewport} from '../hooks/useViewPort';
 import {motion} from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { ProductSelector } from '../redux/Selectors/Product';
+import { inViewDropupShow } from '../utils/type';
 
 const data = [1,2,3,4,5,6,7];
 function SampleNextArrow(props) {
@@ -59,16 +60,20 @@ export default function NewArrival() {
       prevArrow:isDesktop && <SamplePrevArrow />
   };
   return (
-    
          <div className="relative container mb-24">
           <div className='pb-5'>
         <h2 className="inline relative text-2xl md:text-3xl font-medium text-gray-800 uppercase mb-6 after:content-[''] after:block after:absolute after:-right-1/4 after:top-1/2 after:w-[50px] after:h-[4px] after:bg-primary">top new arrival</h2>
           </div>
-            <div>
+            <motion.div
+            variants={inViewDropupShow}
+            initial={'hidden'}
+            whileInView={'visible'}
+            viewport={{ once: true }}
+            >
           <Slider {...settings}>
           {dataArrival.map((item,index) => <CardProduct key={index} _id={item?._id} name={item?.name} price={item?.price} img={item?.attachment} likecount={item?.likeCount} />)}
           </Slider>
-        </div>
+        </motion.div>
     </div>
   )
 }

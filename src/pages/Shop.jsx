@@ -4,6 +4,7 @@ import Breadcrum from '../components/Breadcrum';
 import Navbar from './components/Navbar';
 import { useSelector } from 'react-redux';
 import { ProductSelector } from '../redux/Selectors/Product';
+import { Layout, List, Timer } from 'phosphor-react';
 
 const dataFilter = [
   {
@@ -42,7 +43,7 @@ export default function shop({title}) {
         {/* category filter */}
         <div className="relative">
           <div className="lg:hidden text-gray-400 hover:text-primary text-lg absolute right-0 top-0 cursor-pointer">
-            <i className="fas fa-times" />
+          <Timer size={32} weight="bold" />
           </div>
           <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
           <div className="space-y-2">
@@ -182,10 +183,10 @@ export default function shop({title}) {
         </select>
         <div className="flex gap-2 ml-auto">
           <div className="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer">
-            <i className="fas fa-th" />
+          <Layout size={32} weight="bold" />
           </div>
           <div className="border border-gray-300 w-10 h-9 flex items-center justify-center text-gray-600 rounded cursor-pointer">
-            <i className="fas fa-list" />
+          <List size={32} weight="bold" />
           </div>
         </div>
       </div>

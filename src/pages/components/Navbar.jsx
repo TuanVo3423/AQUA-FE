@@ -20,27 +20,15 @@ export const NavbarSlice = createSlice({
 
 const data = [
     {
-        title : 'Bedroom',
+        title : 'Cellphone',
         image : './images/icons/bed-2.svg',
     },
     {
-        title : 'Bedroom',
+        title : 'Laptop',
         image : './images/icons/bed-2.svg',
     },
     {
-        title : 'Bedroom',
-        image : './images/icons/bed-2.svg',
-    },
-    {
-        title : 'Bedroom',
-        image : './images/icons/bed-2.svg',
-    },
-    {
-        title : 'Bedroom',
-        image : './images/icons/bed-2.svg',
-    },
-    {
-        title : 'Bedroom',
+        title : 'Other',
         image : './images/icons/bed-2.svg',
     },
 ];

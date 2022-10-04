@@ -2,6 +2,22 @@ import { CaretLeft, CaretRight } from 'phosphor-react';
 import React from 'react';
 import Slider from "react-slick";
 import {motion} from 'framer-motion';
+import { Link } from 'react-router-dom';
+
+
+const data = [
+    {
+        title : 'AQUA E-COMMERCE',
+        des :'The e-commerce platform for every niche.Selling only the best things online.Ensuring the best welfare of the buyers and Helping buyers and sellers to attain their goals',
+        img : '../images/banner-01.png',
+    },
+    {
+        title : 'YOUR NEW SUPERPOWER.',
+        des :'You have experienced promax iphone 14? It will make you modern.Everyone has an equal chance of doing business',
+        img : '../images/banner-02.png',
+    },
+    
+]
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -48,7 +64,10 @@ export default function Banner() {
     const settings = {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 1500,
+        // fade: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,  
         nextArrow:isHoverBanner && <SampleNextArrow />,
@@ -60,61 +79,29 @@ export default function Banner() {
     onMouseOut={onOutHoverBanner}
     >
     <Slider {...settings}>
+        {data.map((item,index) => {
+            return (
+        <div   
+        key={index}
+        className={`bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url(${item.img})]`}>
+        <div className="container w-1/2">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
+                {item.title}
+            </h1>
+            <p className="text-lg text-white leading-8">
+                {item.des}
+            </p>
+            <div className="mt-12">
+                <Link to={'/shop'} className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">
+                    Shop now
+                </Link>
+            </div>
+        </div>
+        </div>
+            )
+        })}
       
-    <div   
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
-        <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-                Best Collection For 
-            </h1>
-            <p className="text-base text-white leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
-                assumenda aliquid inventore nihil laboriosam odio
-            </p>
-            <div className="mt-12">
-                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
-               hover:text-white transition">
-                    Shop now
-                </a>
-            </div>
-        </div>
-        </div>
-        <div   
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
-        <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-                Smartphone 
-            </h1>
-            <p className="text-base text-white leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
-                assumenda aliquid inventore nihil laboriosam odio
-            </p>
-            <div className="mt-12">
-                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
-               hover:text-white transition">
-                    Shop now
-                </a>
-            </div>
-        </div>
-        </div>
-        <div   
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
-        <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-                Best Collection For 
-            </h1>
-            <p className="text-base text-white leading-6">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa 
-                assumenda aliquid inventore nihil laboriosam odio
-            </p>
-            <div className="mt-12">
-                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
-               hover:text-white transition">
-                    Shop now
-                </a>
-            </div>
-        </div>
-        </div>
         
     </Slider>
 

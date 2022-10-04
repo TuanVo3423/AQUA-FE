@@ -57,11 +57,11 @@ export default function Login() {
                 <label className="text-gray-600 mb-2 block">
                   UserName <span className="text-primary">*</span>
                 </label>
-                <input onChange={handleOnchangeNameInput} type="email" className="input-box" placeholder="Jon" />
+                <input onChange={handleOnchangeNameInput}  type="email" className="input-box focus:border-primary" placeholder="Jon" />
               </div>
               <div>
                 <label className="text-gray-600 mb-2 block">Password <span className="text-primary">*</span></label>
-                <input onChange={handleOnchangePassWordInput} type="password" className="input-box" placeholder="Type password" />
+                <input onChange={handleOnchangePassWordInput} type="password" className="input-box focus:border-primary" placeholder="Type password" />
               </div>
             </div>
             <div className="flex items-center justify-between mt-6">

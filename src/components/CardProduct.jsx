@@ -10,7 +10,7 @@ export default function CardProduct({name,price,img,likecount,_id}) {
         dispatch(DetailReducer.actions.setIDDetail(_id));
     }
   return (
-        <div test={_id} className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-[450px] overflow-hidden ">
+        <div test={_id} className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-[450px] overflow-hidden cursor-pointer ">
                     <div className="relative">  
                         <img src={img} className="w-full object-contain h-[300px]"></img>
                         <div

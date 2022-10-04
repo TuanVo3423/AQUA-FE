@@ -54,7 +54,7 @@ export default function MainLayout({children ,path, titleIndex , isShowBreadcrum
   const [offset, setOffset] = useState(0);
   const {isDesktop} = useViewport();
   const {isLoading} = useSelector(SystemSelector);
-  console.log('isLoading : ',isLoading);
+  // console.log('isLoading : ',isLoading);
 
     useEffect(() => {
         const onScroll = () => setOffset(window.pageYOffset);

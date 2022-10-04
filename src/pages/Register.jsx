@@ -99,32 +99,32 @@ export default function Register() {
                     <label className="text-gray-600 mb-2 block">
                       UserName <span className="text-primary">*</span>
                     </label>
-                    <input onChange={handleTypeUserName} type="text" className="input-box" placeholder="JohnDoe" />
+                    <input onChange={handleTypeUserName} type="text" className="input-box focus:border-primary" placeholder="JohnDoe" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">
                       Full Name <span className="text-primary">*</span>
                     </label>
-                    <input onChange={handleTypeFullName} type="text" className="input-box" placeholder="John Doe" />
+                    <input onChange={handleTypeFullName} type="text" className="input-box focus:border-primary" placeholder="John Doe" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">
                       Email Address <span className="text-primary">*</span>
                     </label>
-                    <input onChange={handleTypeEmail}  type="email" className="input-box w-full" placeholder="example@mail.com" />
+                    <input onChange={handleTypeEmail}  type="email" className="input-box focus:border-primary w-full" placeholder="example@mail.com" />
                     {error.isError && error.type1 === 'email' && (
                       <p className='text-red-400 text-sm font-bold underline'>{error.message}</p>
                     )}
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">Password <span className="text-primary">*</span></label>
-                    <input onChange={handleTypePassword} type="password" className="input-box" placeholder="type password" />
+                    <input onChange={handleTypePassword} type="password" className="input-box focus:border-primary" placeholder="type password" />
                   </div>
                   <div>
                     <label className="text-gray-600 mb-2 block">Confirm Password 
                       <span className="text-primary">*</span>
                     </label>
-                    <input onChange={handleTypeConfirmPassword} type="password" className="input-box" placeholder="confirm your password" />
+                    <input onChange={handleTypeConfirmPassword} type="password" className="input-box focus:border-primary" placeholder="confirm your password" />
                     {error.isError && error.type2 === 'confirm' && (
                       <p className='text-red-400 text-sm font-bold underline'>{error.message}</p>
                     )}

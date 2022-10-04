@@ -4,8 +4,10 @@ import Slider from 'react-slick';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 import ProductHot from './ProductHot';
 import { useViewport } from '../hooks/useViewPort';
+import {motion} from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { ProductSelector } from '../redux/Selectors/Product';
+import { inViewDropupShow } from '../utils/type';
 const data = [1,2];
 
 function SampleNextArrow(props) {
@@ -70,6 +72,12 @@ export default function RecomendSection() {
          <div className='pb-5'>
          <h2 className="inline relative text-2xl md:text-3xl font-medium text-gray-800 uppercase mb-6 after:content-[''] after:block after:absolute after:-right-1/4 after:top-1/2 after:w-[50px] after:h-[4px] after:bg-primary">TOP NEW LAPTOP  </h2>
           </div>
+          <motion.div
+           variants={inViewDropupShow}
+           initial={'hidden'}
+           whileInView={'visible'}
+           viewport={{ once: true }}
+          >
           <Slider {...settings}>
           {arr.map((item,index) => {
            return (
@@ -100,6 +108,7 @@ export default function RecomendSection() {
           )
          })}
             </Slider>
+          </motion.div>
           </div>
   )
 }
