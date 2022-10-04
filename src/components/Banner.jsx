@@ -65,7 +65,7 @@ export default function Banner() {
         dots: false,
         infinite: true,
         speed: 1500,
-        // fade: true,
+        fade: true,
         autoplay: true,
         autoplaySpeed: 5000,
         slidesToShow: 1,
@@ -79,7 +79,39 @@ export default function Banner() {
     onMouseOut={onOutHoverBanner}
     >
     <Slider {...settings}>
-        {data.map((item,index) => {
+    <div
+        
+        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('./images/banner-01.png')]">
+        <div className="container w-1/2">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
+            AQUA E-COMMERCE
+            </h1>
+            <p className="text-lg text-white leading-8">
+            The e-commerce platform for every niche.Selling only the best things online.Ensuring the best welfare of the buyers and Helping buyers and sellers to attain their goals
+            </p>
+            <div className="mt-12">
+            <Link to={'/shop'} className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">Shop now</Link>
+            </div>
+        </div>
+    </div>
+    <div
+        
+        className="bg-cover bg-no-repeat bg-center py-36 relative bg-[url('./images/banner-02.png')]">
+        <div className="container w-1/2">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
+            YOUR NEW SUPERPOWER.
+            </h1>
+            <p className="text-lg text-white leading-8">
+            You have experienced promax iphone 14? It will make you modern.Everyone has an equal chance of doing business.
+            </p>
+            <div className="mt-12">
+            <Link to={'/shop'} className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+               hover:text-white transition">Shop now</Link>
+            </div>
+        </div>
+    </div>
+        {/* {data.map((item,index) => {
             return (
         <div   
         key={index}
@@ -100,7 +132,7 @@ export default function Banner() {
         </div>
         </div>
             )
-        })}
+        })} */}
       
         
     </Slider>
