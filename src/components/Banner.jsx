@@ -9,12 +9,12 @@ const data = [
     {
         title : 'AQUA E-COMMERCE',
         des :'The e-commerce platform for every niche.Selling only the best things online.Ensuring the best welfare of the buyers and Helping buyers and sellers to attain their goals',
-        img : '../images/banner-01.png',
+        img : './images/banner-01.png',
     },
     {
         title : 'YOUR NEW SUPERPOWER.',
         des :'You have experienced promax iphone 14? It will make you modern.Everyone has an equal chance of doing business',
-        img : '../images/banner-02.png',
+        img : './images/banner-02.png',
     },
     
 ]
@@ -79,40 +79,28 @@ export default function Banner() {
     onMouseOut={onOutHoverBanner}
     >
     <Slider {...settings}>
-    <div   
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-01.png')]">
-        <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-            AQUA E-COMMERCE
-            </h1>
-            <p className="text-base text-white leading-6">
-            The e-commerce platform for every niche.Selling only the best things online.Ensuring the best welfare of the buyers and Helping buyers and sellers to attain their goals
-            </p>
-            <div className="mt-12">
-                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
-               hover:text-white transition">
-                    Shop now
-                </a>
-            </div>
-        </div>
-        </div>
+        {data.map((item,index) => {
+            return (
         <div   
-        className="bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url('../images/banner-02.png')]">
-        <div className="container">
-            <h1 className="xl:text-6xl md:text-5xl text-4xl text-white font-medium mb-4">
-            YOUR NEW SUPERPOWER. 
+        key={index}
+        className={`bg-cover bg-no-repeat bg-center h-[70vh] py-36 relative bg-[url(${item.img})]`}>
+        <div className="container w-1/2">
+            <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
+                {item.title}
             </h1>
-            <p className="text-base text-white leading-6">
-            You have experienced promax iphone 14? It will make you modern.Everyone has an equal chance of doing business
+            <p className="text-lg text-white leading-8">
+                {item.des}
             </p>
             <div className="mt-12">
-                <a href="shop.html" className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
+                <Link to={'/shop'} className="bg-white border text-primary border-primary px-8 py-3 font-medium rounded-md uppercase hover:bg-primary
                hover:text-white transition">
                     Shop now
-                </a>
+                </Link>
             </div>
         </div>
         </div>
+            )
+        })}
       
         
     </Slider>
