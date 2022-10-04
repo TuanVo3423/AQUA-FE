@@ -86,7 +86,7 @@ export default function Banner() {
             <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
             AQUA E-COMMERCE
             </h1>
-            <p className="text-lg text-white leading-8">
+            <p className="text-lg text-white leading-8 line-clamp-3">
             The e-commerce platform for every niche.Selling only the best things online.Ensuring the best welfare of the buyers and Helping buyers and sellers to attain their goals
             </p>
             <div className="mt-12">
@@ -102,7 +102,7 @@ export default function Banner() {
             <h1 className="xl:text-6xl md:text-5xl text-4xl text-primary font-medium mb-4">
             YOUR NEW SUPERPOWER.
             </h1>
-            <p className="text-lg text-white leading-8">
+            <p className="text-lg text-white leading-8 line-clamp-3">
             You have experienced promax iphone 14? It will make you modern.Everyone has an equal chance of doing business.
             </p>
             <div className="mt-12">
