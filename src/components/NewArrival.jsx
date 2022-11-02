@@ -69,7 +69,7 @@ export default function NewArrival() {
   const dataArrival = data.filter((item, index) => {
     return item.isNew === true;
   });
-  console.log("dataArrival", dataArrival);
+  // console.log("dataArrival", dataArrival);
   const settings = {
     dots: true,
     infinite: true,

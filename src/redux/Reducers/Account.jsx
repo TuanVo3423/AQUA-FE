@@ -12,6 +12,8 @@ export const AccountReducer = createSlice({
     fullname: undefined,
     email: undefined,
     cartlist: [],
+    checkout: [], // checkout nay la list chuyen tu cartlist qua
+    history: [],
   },
   reducers: {
     setInfoMoreTimeLogin: (state, action) => {
@@ -20,6 +22,7 @@ export const AccountReducer = createSlice({
       state.userID = action.payload.id;
       state.email = action.payload.email;
       state.cartlist = action.payload.cartlist;
+      state.history = action.payload.historycheckout;
     },
     setAccessToken: (state, action) => {
       state.AccessToken = action.payload;
@@ -88,6 +91,46 @@ export const AccountReducer = createSlice({
         return item.id !== idproduct;
       });
       state.cartlist = result;
+    },
+    setCheckoutListForFirstTime: (state, action) => {
+      state.checkout = action.payload;
+    },
+    removeProductItemOfCheckout: (state, action) => {
+      const { idproduct } = action.payload;
+      const result = state.checkout.filter((item, index) => {
+        return item.id !== idproduct;
+      });
+      state.checkout = result;
+    },
+    requestSetHistoryAfterCheckout: (state, action) => {},
+    // requestSetHistoryAfterCheckout
+    setStateForHistoryAfterConfirm: (state, action) => {
+      action.payload.map((item, index) => state.history.push(item));
+    },
+    setCartListAfterCheckout: (state, action) => {
+      // [1,2,3,4]
+      // [2,3]
+      // result : [1,4]
+      //
+      let result = [];
+      let listid1 = state.cartlist.map((item, index) => {
+        return item.id;
+      });
+      let listid2 = action.payload.map((item, index) => {
+        return item.id;
+      });
+      listid1 = listid1.filter((val) => !listid2.includes(val));
+      for (let i = 0; i < state.cartlist.length; i++) {
+        for (let j = 0; j < listid1.length; j++) {
+          if (state.cartlist[i].id === listid1[j]) {
+            result.push(state.cartlist[i]);
+          }
+        }
+      }
+      state.cartlist = result;
+      state.cartlist.map((item, index) => {
+        console.log("result : " + item);
+      });
     },
   },
 });

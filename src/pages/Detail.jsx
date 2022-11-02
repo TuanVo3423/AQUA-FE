@@ -66,7 +66,7 @@ export default function Detail() {
   const dataRelated = data.filter((item, index) => {
     return item.category === dataDetail[0].category;
   });
-  console.log("dataDetail : ", dataDetail, dataDetail[0].category, dataRelated);
+  // console.log("dataDetail : ", dataDetail, dataDetail[0].category, dataRelated);
   return (
     <div>
       <div className="container pt-4 pb-6 grid lg:grid-cols-2 gap-6">

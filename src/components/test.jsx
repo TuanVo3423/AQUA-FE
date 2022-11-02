@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 
 export default function DataDonation() {
     const { ref: myRef, inView: myElementIsVisible } = useInView();
-    console.log(myElementIsVisible);
+    // console.log(myElementIsVisible);
     const [isFirstTime, setIsFirstTime] = useState(false);
     const [count, setCount] = useState(0);
-    console.log('isFirstTime', isFirstTime, count);
+    // console.log('isFirstTime', isFirstTime, count);
     useEffect(() => {
         if (count === 0) {
             if (myElementIsVisible) {

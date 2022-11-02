@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  AddressBook,
+  CreditCard,
+  Gift,
+  HeartStraight,
+  SignOut,
+  Trash,
+} from "phosphor-react";
+import React from "react";
+import { useSelector } from "react-redux";
 import { AccountSelector } from "../redux/Selectors/Account";
-import { AccountReducer } from "../redux/Reducers/Account";
-export default function Account() {
-  const [choice, setChoice] = useState();
-  const { username, fullname, email } = useSelector(AccountSelector);
-  const dispatch = useDispatch();
-  const handleSigout = async () => {
-    await dispatch(AccountReducer.actions.signOutRequest());
-    await window.location.reload();
-  };
+import { ProductSelector } from "../redux/Selectors/Product";
+
+export default function Wishlist() {
+  const { username, fullname, email, history } = useSelector(AccountSelector);
+  const { data } = useSelector(ProductSelector);
   return (
     <div>
       <div className="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
@@ -38,11 +41,11 @@ export default function Account() {
             <div className="space-y-1 pl-8">
               <a
                 href="account.html"
-                className="relative text-base font-medium capitalize hover:text-primary transition block text-primary"
+                className="relative text-base font-medium capitalize hover:text-primary transition block"
               >
                 Manage account
                 <span className="absolute -left-8 top-0 text-base">
-                  <i className="far fa-address-card" />
+                  <AddressBook size={22} weight="bold" />
                 </span>
               </a>
               <a
@@ -73,7 +76,7 @@ export default function Account() {
               >
                 My order history
                 <span className="absolute -left-8 top-0 text-base">
-                  <i className="fas fa-gift" />
+                  <Gift size={22} weight="bold" />
                 </span>
               </a>
               <a
@@ -104,7 +107,7 @@ export default function Account() {
               >
                 Payment methods
                 <span className="absolute -left-8 top-0 text-base">
-                  <i className="far fa-credit-card" />
+                  <CreditCard size={22} weight="bold" />
                 </span>
               </a>
               <a
@@ -119,26 +122,26 @@ export default function Account() {
             <div className="pl-8 pt-4">
               <a
                 href="wishlist.html"
-                className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block"
+                className="relative medium capitalize font-medium hover:text-primary transition block text-primary"
               >
                 my wishlist
                 <span className="absolute -left-8 top-0 text-base">
-                  <i className="far fa-heart" />
+                  <HeartStraight size={22} weight="bold" />
                 </span>
               </a>
             </div>
             {/* single link end */}
             {/* single link */}
-            <div className="pl-8 pt-4 cursor-pointer">
-              <div
-                onClick={handleSigout}
+            <div className="pl-8 pt-4">
+              <a
+                href="#"
                 className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block"
               >
                 logout
                 <span className="absolute -left-8 top-0 text-base">
-                  <i className="fas fa-sign-out-alt" />
+                  <SignOut size={22} weight="bold" />
                 </span>
-              </div>
+              </a>
             </div>
             {/* single link end */}
           </div>
@@ -146,60 +149,48 @@ export default function Account() {
         </div>
         {/* sidebar end */}
         {/* account content */}
-        <div className="col-span-9 grid md:grid-cols-1 gap-4 mt-6 lg:mt-0">
-          {/* single card */}
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex justify-between items center mb-4">
-              <h3 className="font-medium capitalize text-gray-800 text-lg">
-                personal profile
-              </h3>
-              <a href="#" className="text-primary">
-                Edit
-              </a>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">{username}</h4>
-              <p className="text-gray-800">{email}</p>
-              <p className="text-gray-800">(123) 456-789</p>
-            </div>
-          </div>
-          {/* single card end */}
-          {/* single card */}
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex justify-between items center mb-4">
-              <h3 className="font-medium capitalize text-gray-800 text-lg">
-                Shipping Address
-              </h3>
-              <a href="#" className="text-primary">
-                Edit
-              </a>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">{username}</h4>
-              <p className="text-gray-800">38 Tran Dai Nghia</p>
-              <p className="text-gray-800">Ngu Hoang Son, Da Nang City</p>
-              <p className="text-gray-800">(123) 456-789</p>
-            </div>
-          </div>
-          {/* single card end */}
-          {/* single card */}
-          <div className="shadow rounded bg-white px-4 pt-6 pb-8">
-            <div className="flex justify-between items center mb-4">
-              <h3 className="font-medium capitalize text-gray-800 text-lg">
-                Billing Address
-              </h3>
-              <a href="#" className="text-primary">
-                Edit
-              </a>
-            </div>
-            <div className="space-y-1">
-              <h4 className="text-gray-700 font-medium">{username}</h4>
-              <p className="text-gray-800">38 Tran Dai Nghia</p>
-              <p className="text-gray-800">Ngu Hoang Son, Da Nang City</p>
-              <p className="text-gray-800">(123) 456-789</p>
-            </div>
-          </div>
-          {/* single card end */}
+        <div className="col-span-9 mt-6 lg:mt-0 space-y-4">
+          {/* single wishlist */}
+          {history.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="flex items-center md:justify-between gap-4 md:gap-6 p-4 border border-gray-200 rounded flex-wrap md:flex-nowrap"
+              >
+                {/* cart image */}
+                <div className="md:w-28 w-full flex-shrink-0">
+                  <img src={item?.attachment} className="w-full" />
+                </div>
+                {/* cart image end */}
+                {/* cart content */}
+                <div className="md:w-1/3 w-full">
+                  <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
+                    {item?.name}
+                  </h2>
+                  <p className="text-gray-500 text-sm">
+                    Category:{" "}
+                    <span className="text-green-600">{item?.category}</span>
+                  </p>
+                </div>
+                {/* cart content end */}
+                <div>
+                  <p className="text-primary text-lg font-semibold">
+                    ${item?.price}
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  className="ml-auto md:ml-0 block px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+                >
+                  BUY AGAIN
+                </a>
+                <div className="text-gray-600 hover:text-primary cursor-pointer">
+                  <Trash size={24} weight="bold" />
+                </div>
+              </div>
+            );
+          })}
+          {/* single wishlist end */}
         </div>
         {/* account content end */}
       </div>

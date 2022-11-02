@@ -21,5 +21,10 @@ export const addProductToCartList = (payload) => {
 };
 
 export const changeCartListItems = (payload) => {
+  console.log("cartlist axios : ", payload);
   axios.put(`${URL}/me/updatecartlist`, payload);
+};
+
+export const checkout = (payload) => {
+  axios.put(`${URL}/me/updatehistory`, payload);
 };

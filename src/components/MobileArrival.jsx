@@ -17,10 +17,10 @@ import { Link } from "react-router-dom";
 
 export default function MobileArrival() {
   const { inView, ref } = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
   });
   const { data } = useSelector(ProductSelector);
-  console.log("data", data);
+  // console.log("data", data);
   const dataCellphone = data.filter((item, index) => {
     return item.category === "cellphone";
   });

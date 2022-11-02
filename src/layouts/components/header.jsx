@@ -11,6 +11,7 @@ import {
   Storefront,
   Info,
   PhoneCall,
+  ClockCounterClockwise,
 } from "phosphor-react";
 import React, { useCallback, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -43,7 +44,7 @@ const data = [
   },
 ];
 export default function Header() {
-  const { username, cartlist } = useSelector(AccountSelector);
+  const { username, cartlist, history } = useSelector(AccountSelector);
   const [isShowMenuMobile, setIsShowMenuMobile] = useState(false);
 
   return (
@@ -168,14 +169,14 @@ export default function Header() {
           {/* <!-- navicons --> */}
           <div className="space-x-4 flex items-center">
             <Link
-              to={"/wishlist"}
+              to={"/history"}
               className="text-center flex flex-col justify-center items-center text-gray-700 md:hover:text-primary hover:text-white transition relative"
             >
               <span className="absolute right-0 -top-2 w-5 h-5 rounded-full flex items-center justify-center bg-primary md:hover:text-primary text-white text-xs">
-                5
+                {history.length}
               </span>
-              <HeartStraight size={24} weight="bold" />
-              <p className="text-xs leading-3">Wish List</p>
+              <ClockCounterClockwise size={24} weight="bold" />
+              <p className="text-xs leading-3">History</p>
             </Link>
             <Link
               to={"/cart"}

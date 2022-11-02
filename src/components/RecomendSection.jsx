@@ -69,13 +69,13 @@ export default function RecomendSection() {
     return item.category === "laptop";
   });
   const number1 = dataLaptop.length;
-  console.log(number1);
+  // console.log(number1);
   const arr = [];
   const number = [1, 2];
   for (var i = 0; i < number1; i += 5) {
     arr.push(dataLaptop.slice(i, i + 5));
   }
-  console.log(arr);
+  // console.log(arr);
 
   // const test = dataLaptop
   const { isDesktop } = useViewport();

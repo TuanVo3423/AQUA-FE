@@ -12,7 +12,7 @@ export default function Register() {
     type1 : '',
     type2 : '',
   });
-  console.log('error : ',error);
+  // console.log('error : ',error);
   const history = useNavigate();
   const {registerSuccess} = useSelector(AccountSelector);
   

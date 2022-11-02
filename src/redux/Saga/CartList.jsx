@@ -25,16 +25,16 @@ function* addProductToCartList(action) {
 function* updateProductCartList(action) {
   try {
     yield put(SystemReducer.actions.reset());
-    console.log(action.payload);
+    console.log(
+      "vao saga de thay doi cartlist sau khi checkout : ",
+      action.payload
+    );
     // call api
     const data = yield call(api.changeCartListItems, action.payload);
-    // yield put(
-    //   SystemReducer.actions.setMessageAlert({
-    //     message: "Add product to cartlist successfully",
-    //     type: "success",
-    //     kind: true,
-    //   })
-    // );
+    console.log(
+      "hoan thanh vao database de thay doi cartlist sau khi checkout"
+    );
+
     yield put(SystemReducer.actions.setIsLoading(false));
   } catch (error) {
     console.log(error);

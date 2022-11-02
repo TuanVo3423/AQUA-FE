@@ -52,7 +52,7 @@ export default function shop({ title }) {
                 {/* single category */}
                 {dataFilter.map((item, index) => {
                   return (
-                    <div className="flex items-center">
+                    <div key={index} className="flex items-center">
                       <input
                         type="checkbox"
                         id="Bedroom"
