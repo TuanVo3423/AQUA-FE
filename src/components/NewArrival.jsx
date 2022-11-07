@@ -8,6 +8,9 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
 import { inViewDropupShow } from "../utils/type";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { AccountSelector } from "../redux/Selectors/Account";
 
 const data = [1, 2, 3, 4, 5, 6, 7];
 function SampleNextArrow(props) {
@@ -66,6 +69,15 @@ function SamplePrevArrow(props) {
 export default function NewArrival() {
   const { isDesktop } = useViewport();
   const { data } = useSelector(ProductSelector);
+  const { isAdmin } = useSelector(AccountSelector);
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("admin : ", isAdmin);
+    if (isAdmin) {
+      // window.location.href = "http://127.0.0.1:5174/";
+      window.location.href = "https://aqua-admin-ochre.vercel.app/";
+    }
+  }, [data]);
   const dataArrival = data.filter((item, index) => {
     return item.isNew === true;
   });

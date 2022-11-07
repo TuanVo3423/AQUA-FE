@@ -12,10 +12,9 @@ function* addproductToHistoryCheckout(action) {
     yield put(
       AccountReducer.actions.setCartListAfterCheckout(action.payload.history)
     );
-
     // yield put(
     //   SystemReducer.actions.setMessageAlert({
-    //     message: "Add product to cartlist successfully",
+    //     message: "Do task successfully",
     //     type: "success",
     //     kind: true,
     //   })
@@ -25,6 +24,7 @@ function* addproductToHistoryCheckout(action) {
     console.log(error);
   }
 }
+
 function* checkout() {
   yield takeLatest(
     AccountReducer.actions.requestSetHistoryAfterCheckout,

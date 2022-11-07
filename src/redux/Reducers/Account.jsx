@@ -11,6 +11,7 @@ export const AccountReducer = createSlice({
     password: undefined,
     fullname: undefined,
     email: undefined,
+    isAdmin: undefined,
     cartlist: [],
     checkout: [], // checkout nay la list chuyen tu cartlist qua
     history: [],
@@ -22,6 +23,7 @@ export const AccountReducer = createSlice({
       state.userID = action.payload.id;
       state.email = action.payload.email;
       state.cartlist = action.payload.cartlist;
+      state.isAdmin = action.payload.isadmin;
       state.history = action.payload.historycheckout;
     },
     setAccessToken: (state, action) => {
@@ -103,7 +105,12 @@ export const AccountReducer = createSlice({
       state.checkout = result;
     },
     requestSetHistoryAfterCheckout: (state, action) => {},
-    // requestSetHistoryAfterCheckout
+    removeProductHistory: (state, action) => {
+      const { idProduct } = action.payload;
+      state.history = state.history.filter((item, index) => {
+        return item.id !== idProduct;
+      });
+    },
     setStateForHistoryAfterConfirm: (state, action) => {
       action.payload.map((item, index) => state.history.push(item));
     },

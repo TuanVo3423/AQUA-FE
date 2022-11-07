@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import CardProduct from "../components/CardProduct";
 import Breadcrum from "../components/Breadcrum";
 import Navbar from "./components/Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
-import { Layout, List, Timer } from "phosphor-react";
+import { ShopFilterSelector } from "../redux/Selectors/Shop";
+import { Laptop, Layout, List, Timer } from "phosphor-react";
+import { useEffect } from "react";
+import { ShopReducer } from "../redux/Reducers/Shop";
 
 const dataFilter = [
+  {
+    title: "All",
+  },
   {
     title: "Laptop",
   },
@@ -33,6 +39,36 @@ const dataFilterBrand = [
 ];
 export default function shop({ title }) {
   const { data } = useSelector(ProductSelector);
+  const dispatch = useDispatch();
+  const { FilterProduct } = useSelector(ShopFilterSelector);
+  const [fillterPrice, setFilterPrice] = useState("default");
+  const [isChecked, setIsChecked] = useState({
+    index: 0,
+    bool: false,
+  });
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  console.log("isFirstTime", isFirstTime);
+  const handleClickFilter = ({ indexChecked, field }) => {
+    dispatch(ShopReducer.actions.initFilterProduct(data));
+    dispatch(ShopReducer.actions.filterByCategory(field));
+    setIsChecked({
+      index: indexChecked,
+      bool: true,
+    });
+  };
+  const handleFilterByPrice = (e) => {
+    setIsFirstTime(false);
+    setFilterPrice(e.target.value);
+  };
+  useEffect(() => {
+    if (isChecked.index === 0) {
+      dispatch(ShopReducer.actions.initFilterProduct(data));
+    }
+  }, [isChecked.index]);
+  useEffect(() => {
+    dispatch(ShopReducer.actions.filterByPrice(fillterPrice));
+  }, [fillterPrice]);
+
   return (
     <div>
       {/* <Breadcrum tab={title} /> */}
@@ -54,8 +90,15 @@ export default function shop({ title }) {
                   return (
                     <div key={index} className="flex items-center">
                       <input
+                        checked={index === isChecked.index ? true : false}
+                        onChange={() =>
+                          handleClickFilter({
+                            indexChecked: index,
+                            field: item.title.toLowerCase(),
+                          })
+                        }
                         type="checkbox"
-                        id="Bedroom"
+                        name="group1[]"
                         className="text-primary focus:ring-0 rounded-sm cursor-pointer"
                       />
                       <label
@@ -77,27 +120,7 @@ export default function shop({ title }) {
               <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">
                 Brands
               </h3>
-              <div className="space-y-2">
-                {/* single brand name */}
-                {dataFilterBrand.map((item, index) => {
-                  return (
-                    <div key={index} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id="Dominik"
-                        className="text-primary focus:ring-0 rounded-sm cursor-pointer"
-                      />
-                      <label
-                        htmlFor="Dominik"
-                        className="text-gray-600 ml-3 cursor-pointer"
-                      >
-                        {item.title}
-                      </label>
-                      {/* <div className="ml-auto text-gray-600 text-sm">(15)</div> */}
-                    </div>
-                  );
-                })}
-              </div>
+              <div className="space-y-2">{/* single brand name */}</div>
             </div>
             {/* brand filter end */}
             {/* price filter */}
@@ -276,11 +299,18 @@ export default function shop({ title }) {
             <button className="bg-primary border border-primary text-white px-10 py-3 font-medium rounded uppercase hover:bg-transparent hover:text-primary transition lg:hidden text-sm mr-3 focus:outline-none">
               Filter
             </button>
-            <select className="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
-              <option>Default sorting</option>
-              <option>Price low-high</option>
-              <option>Price high-low</option>
-              <option>Latest product</option>
+            <select
+              value={fillterPrice}
+              onChange={(e) => handleFilterByPrice(e)}
+              className="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
+            >
+              {isFirstTime ? (
+                <option value={"default"}>Price Default</option>
+              ) : (
+                <></>
+              )}
+              <option value={"asc"}>Price ascending</option>
+              <option value={"des"}>Price descending</option>
             </select>
             <div className="flex gap-2 ml-auto">
               <div className="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer">
@@ -294,7 +324,7 @@ export default function shop({ title }) {
           {/* sorting end */}
           {/* product wrapper */}
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 gap-6">
-            {data.map((item, index) => {
+            {FilterProduct.map((item, index) => {
               return (
                 <CardProduct
                   key={index}

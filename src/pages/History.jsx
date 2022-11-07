@@ -6,14 +6,25 @@ import {
   SignOut,
   Trash,
 } from "phosphor-react";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AccountReducer } from "../redux/Reducers/Account";
 import { AccountSelector } from "../redux/Selectors/Account";
 import { ProductSelector } from "../redux/Selectors/Product";
 
 export default function Wishlist() {
-  const { username, fullname, email, history } = useSelector(AccountSelector);
+  const dispatch = useDispatch();
+  const { username, fullname, email, history, userID } =
+    useSelector(AccountSelector);
   const { data } = useSelector(ProductSelector);
+  const handleRemoveProduct = ({ idProduct }) => {
+    dispatch(AccountReducer.actions.removeProductHistory({ idProduct }));
+  };
+  useEffect(() => {
+    dispatch(
+      AccountReducer.actions.requestSetHistoryAfterCheckout({ history, userID })
+    );
+  }, [history]);
   return (
     <div>
       <div className="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
@@ -178,13 +189,16 @@ export default function Wishlist() {
                     ${item?.price}
                   </p>
                 </div>
-                <a
+                {/* <a
                   href="#"
                   className="ml-auto md:ml-0 block px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
                 >
                   BUY AGAIN
-                </a>
-                <div className="text-gray-600 hover:text-primary cursor-pointer">
+                </a> */}
+                <div
+                  onClick={() => handleRemoveProduct({ idProduct: item.id })}
+                  className="text-gray-600 hover:text-primary cursor-pointer"
+                >
                   <Trash size={24} weight="bold" />
                 </div>
               </div>

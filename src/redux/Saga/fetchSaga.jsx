@@ -5,12 +5,14 @@ import { SystemReducer } from "../Reducers/System";
 import { NavbarSlice } from "../../pages/components/Navbar";
 import Cookies from "universal-cookie";
 import * as api from "../../api";
+import { useNavigate } from "react-router-dom";
 
 function* fetchProducts(action) {
   try {
     const accessToken = action.payload;
     const InfoAtHome = yield call(api.fetchProducts, accessToken);
     console.log("InfoAtHome : ", InfoAtHome);
+
     // put này dùng để dispatch 1 actions
     yield put(SystemReducer.actions.setIsLoading(true));
     yield put(
