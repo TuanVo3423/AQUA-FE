@@ -16,8 +16,10 @@
     "axios": "^0.27.2",
     "framer-motion": "^7.3.6",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
+    "react-chat-window": "^1.2.1",
     "react-countup": "^6.3.1",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.0",
@@ -28,6 +30,7 @@
     "react-spinner-overlay": "^0.1.33",
     "redux-saga": "^1.2.1",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.5.3",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {

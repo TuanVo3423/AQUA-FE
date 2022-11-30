@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AccountSelector } from "../redux/Selectors/Account";
 
-const data = [1, 2, 3, 4, 5, 6, 7];
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -52,7 +51,6 @@ function SamplePrevArrow(props) {
         display: "block",
         left: "92%",
         top: "-50px",
-        zIndex: 1,
         transform: "translateX(-50%)",
       }}
       onClick={onClick}
@@ -75,7 +73,7 @@ export default function NewArrival() {
     console.log("admin : ", isAdmin);
     if (isAdmin) {
       // window.location.href = "http://127.0.0.1:5174/";
-      window.location.href = "https://aqua-admin-ochre.vercel.app/";
+      window.location.href = "http://127.0.0.1:5174/";
     }
   }, [data]);
   const dataArrival = data.filter((item, index) => {

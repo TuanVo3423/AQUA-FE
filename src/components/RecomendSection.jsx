@@ -50,7 +50,6 @@ function SamplePrevArrow(props) {
         left: "92%",
         top: "-50px",
         transform: "translateX(-50%)",
-        zIndex: 1,
       }}
       onClick={onClick}
     >

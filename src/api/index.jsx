@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const URL = "http://localhost:5000";
-const URL = "https://aqua-vku.herokuapp.com";
+// export const URL = "http://localhost:5000";
+export const URL = "https://aqua-vku.herokuapp.com";
 
 export const fetchProducts = (cookie, payload) =>
   axios.get(`${URL}`, {
@@ -27,4 +27,20 @@ export const changeCartListItems = (payload) => {
 
 export const checkout = (payload) => {
   axios.put(`${URL}/me/updatehistory`, payload);
+};
+
+export const PaginationAPI = (payload) => {
+  return axios.get(`${URL}/products/shop?page=${payload}`, payload);
+};
+
+export const filterAPI = (payload) => {
+  return axios.get(`${URL}/products/shop/filter?category=${payload}`, payload);
+};
+
+export const fetchComments = (payload) => {
+  return axios.get(`${URL}/comments?id=${payload}`, payload);
+};
+
+export const fetchChat = (payload) => {
+  return axios.get(`${URL}/chat?id=${payload}`, payload);
 };

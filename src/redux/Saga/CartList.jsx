@@ -5,7 +5,6 @@ import * as api from "../../api";
 
 function* addProductToCartList(action) {
   try {
-    yield put(SystemReducer.actions.reset());
     // call api
     const data = yield call(api.addProductToCartList, action.payload);
     yield put(AccountReducer.actions.addProductToCartListState(action.payload));
@@ -24,16 +23,18 @@ function* addProductToCartList(action) {
 
 function* updateProductCartList(action) {
   try {
-    yield put(SystemReducer.actions.reset());
-    console.log(
-      "vao saga de thay doi cartlist sau khi checkout : ",
-      action.payload
-    );
-    // call api
+   
     const data = yield call(api.changeCartListItems, action.payload);
-    console.log(
-      "hoan thanh vao database de thay doi cartlist sau khi checkout"
-    );
+    // console.log(
+    //   "hoan thanh vao database de thay doi cartlist sau khi checkout"
+    // );
+    // yield put(
+    //   SystemReducer.actions.setMessageAlert({
+    //     kind: true,
+    //     message: "Add to cart successfully",
+    //     type: "success",
+    //   })
+    // );
 
     yield put(SystemReducer.actions.setIsLoading(false));
   } catch (error) {

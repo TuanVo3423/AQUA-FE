@@ -5,7 +5,7 @@ import Navbar from "../../pages/components/Navbar";
 import Breadcrum from "../../components/Breadcrum";
 import { motion } from "framer-motion";
 import { useViewport } from "../../hooks/useViewPort";
-import { NavigationArrow } from "phosphor-react";
+import { MessengerLogo, NavigationArrow } from "phosphor-react";
 import { AccountSelector } from "../../redux/Selectors/Account";
 import { SystemReducer } from "../../redux/Reducers/System";
 import { SystemSelector } from "../../redux/Selectors/System";
@@ -19,6 +19,7 @@ import {
   CircleSpinnerOverlay,
   FerrisWheelSpinner,
 } from "react-spinner-overlay";
+import ChatPopup from "../../components/ChatPopup";
 
 export default function MainLayout({
   children,
@@ -151,15 +152,22 @@ export default function MainLayout({
         />
 
         {offset >= 400 ? (
-          <div className="fixed bottom-[80px] right-[50px] p-4 bg-primary rounded-full cursor-pointer">
-            <NavigationArrow
-              size={24}
-              weight="bold"
-              className="rotate-45 text-white"
-              onClick={() => {
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-              }}
-            />
+          <div className="z-[999999]">
+            <div className="fixed bottom-[150px] right-[50px] p-4 bg-primary rounded-full cursor-pointer shadow-2xl">
+              <NavigationArrow
+                size={24}
+                weight="bold"
+                className="rotate-45 text-white"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }}
+              />
+              <ChatPopup />
+
+              {/* <div className="absolute bottom-full right-0 mb-2  p-4 bg-primary rounded-full cursor-pointer shadow-2xl animate-bounce">
+                <MessengerLogo size={24} weight="bold" className="text-white" />
+              </div> */}
+            </div>
           </div>
         ) : (
           ""

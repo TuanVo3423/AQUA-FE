@@ -45,10 +45,7 @@ export const AccountReducer = createSlice({
     registerFailure: (state, action) => {
       state.registerSuccess = false;
     },
-    loginRequest: (state, action) => {
-      state.username = action.payload.username;
-      state.password = action.payload.password;
-    },
+    loginRequest: (state, action) => {},
     loginSuccess: (state, action) => {
       state.loginSuccess = true;
       state.AccessToken = action.payload.accesstoken;

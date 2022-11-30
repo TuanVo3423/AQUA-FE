@@ -6,8 +6,17 @@ export const ShopReducer = createSlice({
     FilterProduct: [],
   },
   reducers: {
+    // ap dung cho fetch
     initFilterProduct: (state, action) => {
-      state.FilterProduct = action.payload;
+      const { page_number, page_size, data, isPaginateLayout } = action.payload;
+      if (isPaginateLayout) {
+        state.FilterProduct = data.slice(
+          (page_number - 1) * page_size,
+          page_number * page_size
+        );
+      } else {
+        state.FilterProduct = data;
+      }
     },
     filterByCategory: (state, action) => {
       state.FilterProduct = state.FilterProduct.filter((item, index) => {

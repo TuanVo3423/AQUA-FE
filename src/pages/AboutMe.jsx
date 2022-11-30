@@ -59,6 +59,9 @@ export default function AboutMe() {
               <div
                 key={index}
                 className="md:w-[48%] w-full relative mt-16 mb-32 sm:mb-24"
+
+
+                
               >
                 <div className="rounded overflow-hidden shadow-md bg-white">
                   <div className="absolute -mt-20 w-full flex justify-center">

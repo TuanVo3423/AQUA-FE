@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import CardProduct from "../components/CardProduct";
-import Breadcrum from "../components/Breadcrum";
-import Navbar from "./components/Navbar";
+import Cookies from "universal-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
 import { ShopFilterSelector } from "../redux/Selectors/Shop";
-import { Laptop, Layout, List, Timer } from "phosphor-react";
+import { Layout, List, Timer } from "phosphor-react";
 import { useEffect } from "react";
 import { ShopReducer } from "../redux/Reducers/Shop";
-
+import { Pagination } from "@mui/material";
+import axios from "axios";
+import { PaginationAPI, fetchProducts, filterAPI } from "../api";
+import {
+  CircleSpinnerOverlay,
+  FerrisWheelSpinner,
+} from "react-spinner-overlay";
 const dataFilter = [
   {
     title: "All",
@@ -23,52 +28,125 @@ const dataFilter = [
     title: "Other",
   },
 ];
-const dataFilterBrand = [
-  {
-    title: "Apple",
-  },
-  {
-    title: "Asus",
-  },
-  {
-    title: "intel",
-  },
-  {
-    title: "Other",
-  },
-];
+
 export default function shop({ title }) {
+  const cookies = new Cookies();
+  const accesstoken = cookies.get("token");
   const { data } = useSelector(ProductSelector);
+  const [datatest, setDatatest] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const [layout, setLayout] = useState(1);
   const { FilterProduct } = useSelector(ShopFilterSelector);
   const [fillterPrice, setFilterPrice] = useState("default");
+  const [pagination, setPagination] = useState(1);
   const [isChecked, setIsChecked] = useState({
     index: 0,
     bool: false,
   });
-  const [isFirstTime, setIsFirstTime] = useState(true);
-  console.log("isFirstTime", isFirstTime);
-  const handleClickFilter = ({ indexChecked, field }) => {
-    dispatch(ShopReducer.actions.initFilterProduct(data));
-    dispatch(ShopReducer.actions.filterByCategory(field));
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await PaginationAPI(1).then((res) => {
+      console.log(res);
+      if (res.data) {
+        setDatatest(res.data);
+      }
+    });
+    setLoading(false);
+  };
+  useEffect(() => {
+    console.log("component mounted");
+    fetchData();
+  }, []);
+  const handleOnchange = async (event, value) => {
+    setLoading(true);
+    const res = await PaginationAPI(value).then((res) => {
+      setDatatest(res.data);
+    });
+    setPagination(value);
+    setLoading(false);
+  };
+  const handleChangeToPaginateLayout = async () => {
+    setLoading(true);
+    const res = await PaginationAPI(1).then((res) => setDatatest(res.data));
+    setLoading(false);
+    setIsChecked({
+      index: 0,
+      bool: false,
+    });
+    setLayout(1);
+  };
+  const handleChangeToAllLayout = async () => {
+    setLoading(true);
+    const res = await fetchProducts(accesstoken).then((res) => {
+      if (res.data) {
+        setDatatest(res.data.products);
+      }
+    });
+    setLoading(false);
+    setIsChecked({
+      index: 0,
+      bool: false,
+    });
+    setLayout(2);
+  };
+  const handleClickFilter = async ({ indexChecked, field }) => {
+    setLoading(true);
+    if (layout === 1) {
+      if (field === "all") {
+        fetchData();
+      } else {
+        const res = await filterAPI(field).then((res) => {
+          console.log("resfiltered", res.data);
+          if (res.data) {
+            setDatatest(res.data);
+          }
+        });
+        setLoading(false);
+      }
+    } else if (layout === 2) {
+      if (field === "all") {
+        const res = await fetchProducts(accesstoken).then((res) => {
+          if (res.data) {
+            setDatatest(res.data.products);
+          }
+        });
+        setLoading(false);
+      } else {
+        const res = await filterAPI(field).then((res) => {
+          console.log("resfiltered", res.data);
+          if (res.data) {
+            setDatatest(res.data);
+          }
+        });
+        setLoading(false);
+      }
+    }
+    console.log("field", field);
+    setLoading(true);
+
+    setLoading(false);
     setIsChecked({
       index: indexChecked,
       bool: true,
     });
   };
   const handleFilterByPrice = (e) => {
-    setIsFirstTime(false);
     setFilterPrice(e.target.value);
+    // const res =
   };
-  useEffect(() => {
-    if (isChecked.index === 0) {
-      dispatch(ShopReducer.actions.initFilterProduct(data));
-    }
-  }, [isChecked.index]);
-  useEffect(() => {
-    dispatch(ShopReducer.actions.filterByPrice(fillterPrice));
-  }, [fillterPrice]);
 
+  if (loading) {
+    return (
+      <>
+        <FerrisWheelSpinner loading={loading} size={28} />
+        <CircleSpinnerOverlay
+          loading={loading}
+          overlayColor="rgba(0,153,255,0.2)"
+        />
+      </>
+    );
+  }
   return (
     <div>
       {/* <Breadcrum tab={title} /> */}
@@ -299,24 +377,30 @@ export default function shop({ title }) {
             <button className="bg-primary border border-primary text-white px-10 py-3 font-medium rounded uppercase hover:bg-transparent hover:text-primary transition lg:hidden text-sm mr-3 focus:outline-none">
               Filter
             </button>
-            <select
-              value={fillterPrice}
-              onChange={(e) => handleFilterByPrice(e)}
-              className="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
-            >
-              {isFirstTime ? (
+            {/* <select
+                value={fillterPrice}
+                onChange={(e) => handleFilterByPrice(e)}
+                className="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
+              >
                 <option value={"default"}>Price Default</option>
-              ) : (
-                <></>
-              )}
-              <option value={"asc"}>Price ascending</option>
-              <option value={"des"}>Price descending</option>
-            </select>
+                <option value={"asc"}>Price ascending</option>
+                <option value={"des"}>Price descending</option>
+              </select> */}
             <div className="flex gap-2 ml-auto">
-              <div className="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer">
+              <div
+                onClick={handleChangeToPaginateLayout}
+                className={`border border-primary w-10 h-9 flex items-center justify-center ${
+                  layout === 1 ? "text-white bg-primary" : "text-gray-600"
+                } rounded cursor-pointer`}
+              >
                 <Layout size={32} weight="bold" />
               </div>
-              <div className="border border-gray-300 w-10 h-9 flex items-center justify-center text-gray-600 rounded cursor-pointer">
+              <div
+                onClick={handleChangeToAllLayout}
+                className={`border border-gray-300 w-10 h-9 flex items-center justify-center  ${
+                  layout === 2 ? "text-white bg-primary" : "text-gray-600"
+                } rounded cursor-pointer`}
+              >
                 <List size={32} weight="bold" />
               </div>
             </div>
@@ -324,7 +408,7 @@ export default function shop({ title }) {
           {/* sorting end */}
           {/* product wrapper */}
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-2 gap-6">
-            {FilterProduct.map((item, index) => {
+            {datatest.map((item, index) => {
               return (
                 <CardProduct
                   key={index}
@@ -338,6 +422,18 @@ export default function shop({ title }) {
               );
             })}
           </div>
+          {layout === 1 && (
+            <div className="w-3/4 flex">
+              <Pagination
+                page={pagination}
+                onChange={handleOnchange}
+                className="mt-10 mx-auto"
+                count={Math.round(data.length / 6)}
+                color="primary"
+              />
+            </div>
+          )}
+
           {/* product wrapper end */}
         </div>
         {/* products end */}
