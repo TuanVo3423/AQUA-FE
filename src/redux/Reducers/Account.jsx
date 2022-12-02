@@ -115,6 +115,9 @@ export const AccountReducer = createSlice({
       // [1,2,3,4]
       // [2,3]
       // result : [1,4]
+      // [1]
+      // [1]
+      // result : []
       //
       let result = [];
       let listid1 = state.cartlist.map((item, index) => {
@@ -123,18 +126,24 @@ export const AccountReducer = createSlice({
       let listid2 = action.payload.map((item, index) => {
         return item.id;
       });
-      listid1 = listid1.filter((val) => !listid2.includes(val));
-      for (let i = 0; i < state.cartlist.length; i++) {
-        for (let j = 0; j < listid1.length; j++) {
-          if (state.cartlist[i].id === listid1[j]) {
-            result.push(state.cartlist[i]);
+      listid1 = listid1.filter((val) => !listid2.includes(val)); // lay ra nhung phan tu co id khác với id checkout
+      if (listid1.length !== 0) {
+        console.log("listid1 : ", listid1);
+        for (let i = 0; i < state.cartlist.length; i++) {
+          for (let j = 0; j < listid1.length; j++) {
+            if (state.cartlist[i].id === listid1[j]) {
+              result.push(state.cartlist[i]);
+            }
           }
         }
+        state.cartlist = result;
+      } else {
+        console.log("listid1 : ", listid1);
+        state.cartlist = [];
       }
-      state.cartlist = result;
-      state.cartlist.map((item, index) => {
-        console.log("result : " + item);
-      });
+      // state.cartlist.map((item, index) => {
+      //   console.log("result : " + item.name);
+      // });
     },
   },
 });

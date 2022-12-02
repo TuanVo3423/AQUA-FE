@@ -1,5 +1,5 @@
 import { Trash } from "phosphor-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AccountReducer } from "../redux/Reducers/Account";
@@ -9,6 +9,7 @@ import { ProductSelector } from "../redux/Selectors/Product";
 export default function Cart() {
   const dispatch = useDispatch();
   const { cartlist, userID } = useSelector(AccountSelector);
+  const [isEmptyCartList, setIsEmptyCartList] = useState(false);
   const { data } = useSelector(ProductSelector);
   const handleIncreaseMount = ({ idproduct, quantity }) => {
     dispatch(
@@ -19,7 +20,11 @@ export default function Cart() {
     );
   };
   useEffect(() => {
-    console.log("change");
+    if (cartlist.length === 0) {
+      setIsEmptyCartList(true);
+    } else {
+      setIsEmptyCartList(false);
+    }
     dispatch(
       AccountReducer.actions.requestChangeCartList({
         cartlist,
@@ -50,8 +55,9 @@ export default function Cart() {
       }
     }
   }
+  console.log("result", result);
   return (
-    <div className="container lg:grid grid-cols-12 gap-6 items-start pb-16 pt-4">
+    <div className="container lg:grid grid-cols-12 gap-6 items-start pb-16 pt-4 min-h-[60vh]">
       {/* product cart */}
       <div className="xl:col-span-9 lg:col-span-8">
         {/* cart title */}
@@ -64,12 +70,14 @@ export default function Cart() {
         </div>
         {/* cart title end */}
         {/* shipping carts */}
-        <div className="space-y-4">
-          {/* single cart */}
-          {result.map((item, index) => {
-            if (result.length === 0) {
-              return <h1>Khong co hang nao o day ca</h1>;
-            } else {
+        {isEmptyCartList ? (
+          <p className="text-xl text-primary font-bold">
+            There are no products here, please add products to cart to checkout!
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {/* single cart */}
+            {result.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -135,9 +143,10 @@ export default function Cart() {
                   </div>
                 </div>
               );
-            }
-          })}
-        </div>
+            })}
+          </div>
+        )}
+
         {/* shipping carts end */}
       </div>
       {/* product cart end */}
@@ -165,7 +174,7 @@ export default function Cart() {
           <h4>${total}</h4>
         </div>
         {/* searchbar */}
-        <div className="flex mb-5">
+        {/* <div className="flex mb-5">
           <input
             type="text"
             className="pl-4 w-full border border-r-0 border-primary py-2 px-3 rounded-l-md focus:ring-primary focus:border-primary text-sm"
@@ -177,13 +186,15 @@ export default function Cart() {
           >
             Apply
           </button>
-        </div>
+        </div> */}
         {/* searchbar end */}
         {/* checkout */}
         <Link
-          to={"/checkout"}
-          className="bg-primary border border-primary text-white px-4 py-3 font-medium rounded-md uppercase hover:bg-transparent
-             hover:text-primary transition text-sm w-full block text-center"
+          to={cartlist.length !== 0 ? "/checkout" : "/cart"}
+          className={`bg-primary border  border-primary text-white px-4 py-3 font-medium rounded-md uppercase hover:bg-transparent
+          hover:text-primary transition text-sm w-full block text-center ${
+            isEmptyCartList && "cursor-not-allowed"
+          }`}
         >
           Process to checkout
         </Link>

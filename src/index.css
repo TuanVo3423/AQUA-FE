@@ -93,8 +93,18 @@
   bottom: 80px;
   right: 50px;
 }
+.sc-message--content.sent .sc-message--text,
+.sc-header,
+.sc-launcher {
+  background-color: #2aa6e3;
+}
 .sc-chat-window {
   z-index: 100;
   bottom: 150px;
   height: calc(100% - 300px);
 }
+.sc-header--img {
+  object-fit: cover;
+}
+/* avt mess */
+/* .sc-message--avatar */

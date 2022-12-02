@@ -81,6 +81,7 @@ export default function ChatPopup() {
     <div>
       <div>
         <Launcher
+          className="bg-primary"
           agentProfile={{
             teamName: "ADMIN",
             imageUrl:

@@ -10,8 +10,7 @@ export default function OrderComplete() {
   const { history, userID, cartlist } = useSelector(AccountSelector);
 
   useEffect(() => {
-    console.log("thay doi cartlist ");
-    dispatch(
+    const email = dispatch(
       AccountReducer.actions.requestChangeCartList({
         cartlist,
         userID,

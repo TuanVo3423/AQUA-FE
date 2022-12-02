@@ -2,28 +2,53 @@ import { Trash } from "phosphor-react";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Paypal from "../components/Paypal";
 import { AccountReducer } from "../redux/Reducers/Account";
 import { AccountSelector } from "../redux/Selectors/Account";
-import { ProductSelector } from "../redux/Selectors/Product";
 
 export default function Checkout() {
-  const countries = ["China", "Russia", "UK"];
-  const [ischeckout, setIsCheckOut] = useState(false);
+  // const [ischeckout, setIsCheckOut] = useState(false);
+  const [isEmptyCheckout, setIsEmptyCheckout] = useState(false);
+  const [flags, setFlags] = useState(1);
   const dispatch = useDispatch();
-  const [menu, setMenu] = useState(false);
-  const [country, setCountry] = useState("United States");
-  const { data } = useSelector(ProductSelector);
+  // checkout -> san pham từ cartlist qua checkout
+  const [infoYourOrder, setInfoYourOrder] = useState({
+    email: "",
+    name: "",
+    address: "",
+    phone: undefined,
+  });
+  useEffect(() => {
+    console.log("infoYourOrder", infoYourOrder);
+  }, [infoYourOrder]);
   const { cartlist, userID, checkout } = useSelector(AccountSelector);
-  const dataCheckOut = data[0];
-  const handleCheckout = () => {
-    dispatch(AccountReducer.actions.setStateForHistoryAfterConfirm(checkout));
-    setIsCheckOut(true);
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    console.log(e.target["email-address"].value);
+    console.log(e.target["name"].value);
+    console.log(e.target["phone"].value);
+    console.log(e.target["address"].value);
+    setInfoYourOrder({
+      ...infoYourOrder,
+      email: e.target["email-address"].value,
+      name: e.target["name"].value,
+      address: e.target["address"].value,
+      phone: e.target["phone"].value,
+    });
   };
   useEffect(() => {
-    dispatch(AccountReducer.actions.setCheckoutListForFirstTime(cartlist));
+    if (flags === 1) {
+      setFlags(2);
+      dispatch(AccountReducer.actions.setCheckoutListForFirstTime(cartlist));
+    }
   }, []);
+  useEffect(() => {
+    if (checkout.length === 0) {
+      setIsEmptyCheckout(true);
+    } else {
+      setIsEmptyCheckout(false);
+    }
+  }, [checkout]);
   let total = 0;
   for (let i = 0; i < checkout.length; i++) {
     total += checkout[i].price * checkout[i].quantity;
@@ -33,14 +58,13 @@ export default function Checkout() {
       AccountReducer.actions.removeProductItemOfCheckout({ idproduct: id })
     );
   };
-  const changeText = (e) => {
-    setMenu(false);
-    setCountry(e.target.textContent);
-  };
 
   return (
     <div className="bg-gray-50">
-      <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <form
+        onSubmit={(e) => handleCheckout(e)}
+        className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+      >
         <h2 className="sr-only">Checkout</h2>
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
           <div>
@@ -58,9 +82,11 @@ export default function Checkout() {
                 <div className="mt-1">
                   <input
                     type="email"
+                    required
                     id="email-address"
                     name="email-address"
                     autoComplete="email"
+                    // onChange={}
                     className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -70,36 +96,20 @@ export default function Checkout() {
               <h2 className="text-lg font-medium text-gray-900">
                 Shipping information
               </h2>
-              <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+              <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-1 sm:gap-x-4">
                 <div>
                   <label
-                    htmlFor="first-name"
+                    htmlFor="name"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    First name
+                    Name
                   </label>
                   <div className="mt-1">
                     <input
                       type="text"
-                      id="first-name"
-                      name="first-name"
-                      autoComplete="given-name"
-                      className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Last name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="last-name"
-                      name="last-name"
+                      id="name"
+                      name="name"
+                      required
                       autoComplete="family-name"
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
@@ -118,6 +128,7 @@ export default function Checkout() {
                       type="text"
                       name="address"
                       id="address"
+                      required
                       autoComplete="street-address"
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
@@ -135,6 +146,7 @@ export default function Checkout() {
                       type="text"
                       name="phone"
                       id="phone"
+                      required
                       autoComplete="tel"
                       className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
@@ -294,12 +306,17 @@ export default function Checkout() {
                 </div>
               </dl>
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                {ischeckout ? (
-                  <Paypal dataCheckout={checkout} />
+                {infoYourOrder.name ? (
+                  <Paypal
+                    dataCheckout={checkout}
+                    infoYourOrder={infoYourOrder}
+                  />
                 ) : (
                   <button
-                    onClick={handleCheckout}
-                    className="w-full bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:opacity-[0.8]  focus:outline-none focus:ring-2 focus:ring-offset-2"
+                    // onClick={(e) => handleCheckout(e)}
+                    className={`${
+                      isEmptyCheckout && "cursor-not-allowed"
+                    } w-full bg-primary border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:opacity-[0.8]  focus:outline-none focus:ring-2 focus:ring-offset-2`}
                   >
                     Confirm order
                   </button>
@@ -308,7 +325,7 @@ export default function Checkout() {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

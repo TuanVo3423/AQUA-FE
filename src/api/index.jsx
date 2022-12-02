@@ -44,3 +44,11 @@ export const fetchComments = (payload) => {
 export const fetchChat = (payload) => {
   return axios.get(`${URL}/chat?id=${payload}`, payload);
 };
+
+export const sendEmailAfterCheckout = (payload) => {
+  return axios.post(`${URL}/me/email`, payload);
+};
+
+export const sendEmailToAdmin = (payload) => {
+  return axios.post(`${URL}/me/emailToAdmin`, payload);
+};
