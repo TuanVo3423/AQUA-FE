@@ -11,6 +11,7 @@ import { inViewDropupShow } from "../utils/type";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AccountSelector } from "../redux/Selectors/Account";
+import { URLAD } from "../api";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -72,8 +73,7 @@ export default function NewArrival() {
   useEffect(() => {
     console.log("admin : ", isAdmin);
     if (isAdmin) {
-      // window.location.href = "http://127.0.0.1:5174/";
-      window.location.href = "http://127.0.0.1:5174/";
+      window.location.href = URLAD;
     }
   }, [data]);
   const dataArrival = data.filter((item, index) => {

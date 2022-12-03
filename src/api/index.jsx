@@ -2,6 +2,8 @@ import axios from "axios";
 
 // export const URL = "http://localhost:5000";
 export const URL = "https://web-production-168e.up.railway.app";
+export const URLAD = "https://aqua-admin-ochre.vercel.app";
+// export const URLAD = "http://127.0.0.1:5174";
 
 export const fetchProducts = (cookie, payload) =>
   axios.get(`${URL}`, {
