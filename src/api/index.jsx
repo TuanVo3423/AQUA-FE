@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // export const URL = "http://localhost:5000";
-export const URL = "https://aqua-vku.herokuapp.com";
+export const URL = "https://web-production-168e.up.railway.app";
 
 export const fetchProducts = (cookie, payload) =>
   axios.get(`${URL}`, {
