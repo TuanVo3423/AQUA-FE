@@ -134,7 +134,6 @@ export default function MainLayout({
         {children}
         {isLoading && (
           <>
-            <FerrisWheelSpinner loading={isLoading} size={28} />
             <CircleSpinnerOverlay
               loading={isLoading}
               overlayColor="rgba(0,153,255,0.2)"
