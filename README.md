@@ -3,8 +3,10 @@
 sb-wrzt722058287@personal.example.com
 ZB16Ovo+
 # account HotMail client 
-aqua_client_21git@outlook.com 928852169
+aqua_client_21git@outlook.com 
 tuandzvc123
+928852169
 # account AdminMail 
-aqua_vku_21git@outlook.com 896856971
+aqua_vku_21git@outlook.com 
 tuandzvc123
+896856971
