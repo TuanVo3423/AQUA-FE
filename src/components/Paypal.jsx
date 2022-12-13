@@ -47,12 +47,12 @@ export default function Paypal({ dataCheckout, infoYourOrder }) {
           );
           await dispatch(
             AccountReducer.actions.requestSetHistoryAfterCheckout({
-              history: temp,
+              history: [...history, ...temp],
               userID,
             })
           );
-          console.log("history : ", history);
           console.log("temp : ", temp);
+          console.log("history : ", history);
           const email = sendEmailAfterCheckout(infoYourOrder)
             .then((res) => {
               console.log(res);
