@@ -1,7 +1,7 @@
 # AQUA-ACCOUNT
  # account paypal sanbox to test checkout
-sb-wrzt722058287@personal.example.com
-ZB16Ovo+
+sb-bqdyp23518062@personal.example.com
+3xR8NU<p
 # account HotMail client 
 aqua_client_21git@outlook.com 
 tuandzvc123
