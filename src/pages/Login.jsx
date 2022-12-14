@@ -23,7 +23,7 @@ export default function Login() {
       );
       history("/");
     } else if (loginSuccess && isAdmin) {
-      history(URLAD);
+      window.location.href = URLAD;
     }
   }, [history, loginSuccess]);
   const [dataInput, setDataInput] = useState({
