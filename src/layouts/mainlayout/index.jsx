@@ -15,10 +15,7 @@ import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import CustomizedSnackbars from "../../components/ToastMessage";
 import axios from "axios";
-import {
-  CircleSpinnerOverlay,
-  FerrisWheelSpinner,
-} from "react-spinner-overlay";
+import { CircleSpinnerOverlay } from "react-spinner-overlay";
 import ChatPopup from "../../components/ChatPopup";
 
 export default function MainLayout({

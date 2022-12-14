@@ -4,14 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { AccountReducer } from "../redux/Reducers/Account";
 import { AccountSelector } from "../redux/Selectors/Account";
 import { SystemReducer } from "../redux/Reducers/System";
+import { URLAD } from "../api";
 
 export default function Login() {
   const dispatch = useDispatch();
   const history = useNavigate();
   let count = 0;
-  const { loginSuccess } = useSelector(AccountSelector);
+  const { loginSuccess, isAdmin } = useSelector(AccountSelector);
   useEffect(() => {
-    if (loginSuccess) {
+    if (loginSuccess && !isAdmin) {
       dispatch(
         SystemReducer.actions.setMessageAlert({
           message:
@@ -21,6 +22,8 @@ export default function Login() {
         })
       );
       history("/");
+    } else if (loginSuccess && isAdmin) {
+      history(URLAD);
     }
   }, [history, loginSuccess]);
   const [dataInput, setDataInput] = useState({

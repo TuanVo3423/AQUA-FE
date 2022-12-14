@@ -11,7 +11,7 @@ import { inViewDropupShow } from "../utils/type";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AccountSelector } from "../redux/Selectors/Account";
-import { URLAD } from "../api";
+// import { URLAD } from "../api";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -70,12 +70,12 @@ export default function NewArrival() {
   const { data } = useSelector(ProductSelector);
   const { isAdmin } = useSelector(AccountSelector);
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log("admin : ", isAdmin);
-    if (isAdmin) {
-      window.location.href = URLAD;
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   console.log("admin : ", isAdmin);
+  //   if (isAdmin) {
+  //     window.location.href = URLAD;
+  //   }
+  // }, [data]);
   const dataArrival = data.filter((item, index) => {
     return item.isNew === true;
   });
