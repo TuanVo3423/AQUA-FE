@@ -1,13 +1,17 @@
 import {
   AddressBook,
+  ClockCounterClockwise,
   CreditCard,
   Gift,
   HeartStraight,
+  ShoppingCart,
   SignOut,
   Trash,
+  UserFocus,
 } from "phosphor-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { AccountReducer } from "../redux/Reducers/Account";
 import { AccountSelector } from "../redux/Selectors/Account";
 import { ProductSelector } from "../redux/Selectors/Product";
@@ -50,110 +54,40 @@ export default function Wishlist() {
           <div className="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
             {/* single link */}
             <div className="space-y-1 pl-8">
-              <a
-                href="account.html"
-                className="relative text-base font-medium capitalize hover:text-primary transition block"
+              <Link
+                to={"/account"}
+                className="flex gap-x-2 justify-start items-center medium capitalize text-gray-800 font-medium hover:text-primary transition"
               >
+                <UserFocus size={20} weight="bold" />
                 Manage account
-                <span className="absolute -left-8 top-0 text-base">
-                  <AddressBook size={22} weight="bold" />
-                </span>
-              </a>
-              <a
-                href="profile-info.html"
-                className="hover:text-primary transition capitalize block"
-              >
-                Profile information
-              </a>
-              <a
-                href="manage-address.html"
-                className="hover:text-primary transition capitalize block"
-              >
-                Manage address
-              </a>
-              <a
-                href="change-password.html"
-                className="hover:text-primary transition capitalize block"
-              >
-                change password
-              </a>
+              </Link>
             </div>
             {/* single link end */}
             {/* single link */}
             <div className="space-y-1 pl-8 pt-4">
-              <a
-                href="#"
-                className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block"
+              <Link
+                to={"/history"}
+                className="flex gap-x-2 justify-start items-center medium capitalize text-gray-800 font-medium hover:text-primary transition"
               >
+                <ClockCounterClockwise size={20} weight="bold" />
                 My order history
-                <span className="absolute -left-8 top-0 text-base">
-                  <Gift size={22} weight="bold" />
-                </span>
-              </a>
-              <a
-                href="#"
-                className="hover:text-primary transition block capitalize"
-              >
-                my returns
-              </a>
-              <a
-                href="#"
-                className="hover:text-primary transition block capitalize"
-              >
-                my cancellations
-              </a>
-              <a
-                href="#"
-                className="hover:text-primary transition block capitalize"
-              >
-                my reviews
-              </a>
+              </Link>
             </div>
             {/* single link end */}
             {/* single link */}
-            <div className="space-y-1 pl-8 pt-4">
-              <a
-                href="#"
-                className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block"
-              >
-                Payment methods
-                <span className="absolute -left-8 top-0 text-base">
-                  <CreditCard size={22} weight="bold" />
-                </span>
-              </a>
-              <a
-                href="#"
-                className="hover:text-primary transition block capitalize"
-              >
-                Voucher
-              </a>
-            </div>
-            {/* single link end */}
-            {/* single link */}
+
             <div className="pl-8 pt-4">
-              <a
-                href="wishlist.html"
-                className="relative medium capitalize font-medium hover:text-primary transition block text-primary"
+              <Link
+                to={"/cart"}
+                className="flex gap-x-2 justify-start items-center medium capitalize text-gray-800 font-medium hover:text-primary transition"
               >
-                my wishlist
-                <span className="absolute -left-8 top-0 text-base">
-                  <HeartStraight size={22} weight="bold" />
-                </span>
-              </a>
+                <ShoppingCart size={20} weight="bold" />
+                my cartlist
+              </Link>
             </div>
             {/* single link end */}
             {/* single link */}
-            <div className="pl-8 pt-4">
-              <a
-                href="#"
-                className="relative medium capitalize text-gray-800 font-medium hover:text-primary transition block"
-              >
-                logout
-                <span className="absolute -left-8 top-0 text-base">
-                  <SignOut size={22} weight="bold" />
-                </span>
-              </a>
-            </div>
+
             {/* single link end */}
           </div>
           {/* profile links end */}

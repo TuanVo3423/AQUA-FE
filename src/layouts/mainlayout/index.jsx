@@ -107,7 +107,7 @@ export default function MainLayout({
     window.scrollTo(0, 0);
   }, [path]);
   return (
-    <div>
+    <div className="flex flex-col justify-center min-h-screen w-full">
       {isDesktop ? (
         <motion.div
           initial={{ opacity: 0.7, x: 0, y: 0 }}
@@ -153,7 +153,7 @@ export default function MainLayout({
               <NavigationArrow
                 size={24}
                 weight="bold"
-                className="rotate-45 text-white"
+                className="rotate-45 animate-none text-white"
                 onClick={() => {
                   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                 }}

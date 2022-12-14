@@ -25,7 +25,7 @@ export default function Login() {
     } else if (loginSuccess && isAdmin) {
       window.location.href = URLAD;
     }
-  }, [history, loginSuccess]);
+  }, [loginSuccess]);
   const [dataInput, setDataInput] = useState({
     username: "",
     password: "",

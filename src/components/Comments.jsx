@@ -5,9 +5,9 @@ import moment from "moment/moment";
 export default function Comments({ username, content, time }) {
   return (
     <div>
-      <article className="p-6 mb-6 text-base bg-white rounded-lg border-b-2 dark:bg-gray-900">
+      <article className="p-6 mb-6 text-base bg-primary/30 rounded-lg border-b-2 dark:bg-gray-900">
         <footer className="flex justify-between items-center mb-2">
-          <div className="flex items-center">
+          <div className="flex items-center font-semibold">
             <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
               <User
                 className="mr-2 w-6 h-6 rounded-full"
@@ -47,7 +47,7 @@ export default function Comments({ username, content, time }) {
             <span className="sr-only">Comment settings</span>
           </button>
         </footer>
-        <p className="text-gray-500 dark:text-gray-400">{content}</p>
+        <p className="text-gray-700 dark:text-gray-400">{content}</p>
       </article>
     </div>
   );

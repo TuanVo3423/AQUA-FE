@@ -23,7 +23,7 @@ export default function home() {
       <RecomendSection />
       {/* <AdMobile /> */}
       <DataDonation />
-      <MobileArrival />
+    <MobileArrival />
     </div>
   );
 }

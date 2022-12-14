@@ -138,13 +138,12 @@ export default function shop({ title }) {
 
   if (loading) {
     return (
-      <>
-        <FerrisWheelSpinner loading={loading} size={28} />
+      <div className="w-full h-[80vh]">
         <CircleSpinnerOverlay
           loading={loading}
           overlayColor="rgba(0,153,255,0.2)"
         />
-      </>
+      </div>
     );
   }
   return (
