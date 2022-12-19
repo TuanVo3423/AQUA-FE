@@ -10,7 +10,7 @@ export default function Paypal({ dataCheckout, infoYourOrder }) {
   const time = new Date().toISOString();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let total = 0;
+  let total = 5;
   for (let i = 0; i < dataCheckout.length; i++) {
     total += dataCheckout[i].price;
   }

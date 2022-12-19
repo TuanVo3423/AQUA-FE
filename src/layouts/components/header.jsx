@@ -1,5 +1,4 @@
 import {
-  HeartStraight,
   List,
   MagnifyingGlass,
   MagnifyingGlassPlus,

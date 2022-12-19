@@ -3,17 +3,13 @@ import CardProduct from "../components/CardProduct";
 import Cookies from "universal-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
-import { ShopFilterSelector } from "../redux/Selectors/Shop";
 import { Layout, List, Timer } from "phosphor-react";
 import { useEffect } from "react";
-import { ShopReducer } from "../redux/Reducers/Shop";
 import { Pagination } from "@mui/material";
-import axios from "axios";
 import { PaginationAPI, fetchProducts, filterAPI } from "../api";
-import {
-  CircleSpinnerOverlay,
-  FerrisWheelSpinner,
-} from "react-spinner-overlay";
+import { CircleSpinnerOverlay } from "react-spinner-overlay";
+import { useCallback } from "react";
+import { SystemReducer } from "../redux/Reducers/System";
 const dataFilter = [
   {
     title: "All",
@@ -37,8 +33,7 @@ export default function shop({ title }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [layout, setLayout] = useState(1);
-  const { FilterProduct } = useSelector(ShopFilterSelector);
-  const [fillterPrice, setFilterPrice] = useState("default");
+  const [setFilterPrice] = useState("default");
   const [pagination, setPagination] = useState(1);
   const [isChecked, setIsChecked] = useState({
     index: 0,
@@ -68,7 +63,17 @@ export default function shop({ title }) {
   };
   const handleChangeToPaginateLayout = async () => {
     setLoading(true);
-    const res = await PaginationAPI(1).then((res) => setDatatest(res.data));
+
+    const res = await PaginationAPI(1).then((res) => {
+      setDatatest(res.data);
+      dispatch(
+        SystemReducer.actions.setMessageAlert({
+          message: "You have changed to pagination products",
+          type: "info",
+          kind: true,
+        })
+      );
+    });
     setLoading(false);
     setIsChecked({
       index: 0,
@@ -81,6 +86,13 @@ export default function shop({ title }) {
     const res = await fetchProducts(accesstoken).then((res) => {
       if (res.data) {
         setDatatest(res.data.products);
+        dispatch(
+          SystemReducer.actions.setMessageAlert({
+            message: "You have changed to view all products",
+            type: "info",
+            kind: true,
+          })
+        );
       }
     });
     setLoading(false);
@@ -131,10 +143,10 @@ export default function shop({ title }) {
       bool: true,
     });
   };
-  const handleFilterByPrice = (e) => {
+  const handleFilterByPrice = useCallback((e) => {
     setFilterPrice(e.target.value);
     // const res =
-  };
+  });
 
   if (loading) {
     return (

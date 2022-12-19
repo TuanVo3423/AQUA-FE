@@ -1,11 +1,6 @@
-import {
-  Heart,
-  HeartStraight,
-  HeartStraightBreak,
-  MagnifyingGlassPlus,
-  Star,
-} from "phosphor-react";
+import { HeartStraight, MagnifyingGlassPlus, Star } from "phosphor-react";
 import React from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AccountReducer } from "../redux/Reducers/Account";
@@ -22,7 +17,7 @@ export default function ProductHot({
 }) {
   const dispatch = useDispatch();
   const { userID } = useSelector(AccountSelector);
-  const handleAddProductToCartList = () => {
+  const handleAddProductToCartList = useCallback(() => {
     dispatch(
       AccountReducer.actions.requestAddProductToCartList({
         userID,
@@ -34,10 +29,10 @@ export default function ProductHot({
         category,
       })
     );
-  };
-  const handleSeeDetail = () => {
+  });
+  const handleSeeDetail = useCallback(() => {
     dispatch(DetailReducer.actions.setIDDetail(_id));
-  };
+  });
   return (
     <div className="group flex flex-col justify-between rounded mx-2 bg-white shadow h-full overflow-hidden cursor-pointer">
       <div className="relative h-[73%]">

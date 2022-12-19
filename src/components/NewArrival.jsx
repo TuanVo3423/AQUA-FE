@@ -1,5 +1,4 @@
 import React from "react";
-import { MagnifyingGlassPlus, HeartStraight } from "phosphor-react";
 import CardProduct from "./CardProduct";
 import Slider from "react-slick";
 import { CaretLeft, CaretRight } from "phosphor-react";
@@ -9,9 +8,7 @@ import { useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
 import { inViewDropupShow } from "../utils/type";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { AccountSelector } from "../redux/Selectors/Account";
-// import { URLAD } from "../api";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;

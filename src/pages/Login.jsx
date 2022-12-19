@@ -5,6 +5,7 @@ import { AccountReducer } from "../redux/Reducers/Account";
 import { AccountSelector } from "../redux/Selectors/Account";
 import { SystemReducer } from "../redux/Reducers/System";
 import { URLAD } from "../api";
+import { useCallback } from "react";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -30,18 +31,18 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const handleOnchangeNameInput = (e) => {
+  const handleOnchangeNameInput = useCallback((e) => {
     setDataInput({
       ...dataInput,
       username: e.target.value,
     });
-  };
-  const handleOnchangePassWordInput = (e) => {
+  });
+  const handleOnchangePassWordInput = useCallback((e) => {
     setDataInput({
       ...dataInput,
       password: e.target.value,
     });
-  };
+  });
 
   const handleLogin = async () => {
     await dispatch(AccountReducer.actions.loginRequest(dataInput));

@@ -1,39 +1,50 @@
-import React from 'react'
+import React from "react";
 
-export default function Feature() {
+const data = [
+  {
+    id: 1,
+    line1: "STUDENT! WIN A DREAM HOLIDAY",
+
+    line2: "+ GET 20% OFF 24/7",
+  },
+  {
+    id: 2,
+    line1: "BLACK PRIDAY!",
+    line2: "+ GET 10% OFF 24/7",
+  },
+  {
+    id: 3,
+    line1: "SUPER SUNDAY!",
+    line2: "+ GET 50% OFF 24/7",
+  },
+];
+export default function Feature2() {
+  const [isHover, setIsHover] = React.useState(1);
+  const handleHover = React.useCallback((index) => {
+    setIsHover(index);
+  }, []);
   return (
     <div>
-         <div className="container py-16">
+      <div className="container py-16">
         <div className="lg:w-10/12 grid md:grid-cols-3 gap-3 lg:gap-6 mx-auto justify-center">
-            <div
-                className="border-primary border rounded-sm px-8 lg:px-3 lg:py-6 py-4 flex justify-center items-center gap-5">
-                <img src="./images/icons/delivery-van.svg" className="lg:w-12 w-10 h-12 object-contain"></img>
-                <div>
-                    <h4 className="font-medium capitalize text-lg">free shipping</h4>
-                    <p className="text-gray-500 text-xs lg:text-sm">Order over $200</p>
-                </div>
-            </div>
-
-            <div
-                className="border-primary border rounded-sm px-8 lg:px-3 lg:py-6 py-4 flex justify-center items-center gap-5">
-                <img src="./images/icons/delivery-van.svg" className="lg:w-12 w-10 h-12 object-contain"></img>
-                <div>
-                    <h4 className="font-medium capitalize text-lg">free shipping</h4>
-                    <p className="text-gray-500 text-xs lg:text-sm">Order over $200</p>
-                </div>
-            </div>
-
-            <div
-                className="border-primary border rounded-sm px-8 lg:px-3 lg:py-6 py-4 flex justify-center items-center gap-5">
-                <img src="./images/icons/delivery-van.svg" className="lg:w-12 w-10 h-12 object-contain"></img>
-                <div>
-                    <h4 className="font-medium capitalize text-lg">free shipping</h4>
-                    <p className="text-gray-500 text-xs lg:text-sm">Order over $200</p>
-                </div>
-            </div>
-
+          {data.map((item, index) => {
+            return (
+              <div
+                key={item.id}
+                onMouseOver={() => handleHover(index)}
+                className={`${
+                  index === isHover
+                    ? "bg-primary text-white border-primary"
+                    : "bg-white text-primary border-primary"
+                } transition-all duration-500 flex flex-col items-center px-6 py-9 justify-center gap-y-1 text-base font-normal border-[1px] rounded-3xl cursor-pointer`}
+              >
+                <p>{item.line1}</p>
+                <p>{item.line2}</p>
+              </div>
+            );
+          })}
         </div>
+      </div>
     </div>
-    </div>
-  )
+  );
 }

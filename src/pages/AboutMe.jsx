@@ -9,7 +9,7 @@ const data = [
     github: "https://github.com/TuanVo3423",
     twitter: "https://twitter.com",
     instagram: "https://instagram.com",
-    img: "https://bwd2022.vercel.app/assets/member-3.jpg",
+    img: "https://titus-portfolio.vercel.app/_next/image?url=%2Favt02.png&w=128&q=75",
   },
   {
     name: "HA CANH HONG PHUC",
@@ -59,9 +59,6 @@ export default function AboutMe() {
               <div
                 key={index}
                 className="md:w-[48%] w-full relative mt-16 mb-32 sm:mb-24"
-
-
-                
               >
                 <div className="rounded overflow-hidden shadow-md bg-white">
                   <div className="absolute -mt-20 w-full flex justify-center">

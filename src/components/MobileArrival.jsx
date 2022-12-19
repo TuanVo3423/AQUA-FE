@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  MagnifyingGlassPlus,
-  HeartStraight,
-  Eye,
-  ArrowRight,
-} from "phosphor-react";
+import { ArrowRight } from "phosphor-react";
 import CardProduct from "./CardProduct";
 import { useSelector } from "react-redux";
 import { ProductSelector } from "../redux/Selectors/Product";
-import Slider from "react-slick";
-import { CaretLeft, CaretRight } from "phosphor-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { inViewFromLeftShow, inViewScaleParentShow } from "../utils/type";

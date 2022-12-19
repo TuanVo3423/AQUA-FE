@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { MagnifyingGlassPlus, HeartStraight, Star } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { DetailReducer } from "../redux/Reducers/Detail";
@@ -16,10 +16,10 @@ export default function CardProduct({
 }) {
   const { userID } = useSelector(AccountSelector);
   const dispatch = useDispatch();
-  const handleSeeDetail = () => {
+  const handleSeeDetail = useCallback(() => {
     dispatch(DetailReducer.actions.setIDDetail(_id));
-  };
-  const handleAddProductToCartList = () => {
+  });
+  const handleAddProductToCartList = useCallback(() => {
     dispatch(
       AccountReducer.actions.requestAddProductToCartList({
         userID,
@@ -31,7 +31,7 @@ export default function CardProduct({
         category,
       })
     );
-  };
+  });
   return (
     <div
       test={_id}
