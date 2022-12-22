@@ -18,6 +18,9 @@ export const login = (payload) => axios.post(`${URL}/auth/login`, payload);
 export const logout = () => axios.get(`${URL}/auth/logout`);
 
 // cartlist
+export const getAllCartList = (payload) => {
+  return axios.get(`${URL}/me/cart?id=${payload}`, payload);
+};
 export const addProductToCartList = (payload) => {
   axios.put(`${URL}/me/addcart`, payload);
 };

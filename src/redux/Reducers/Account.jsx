@@ -66,14 +66,26 @@ export const AccountReducer = createSlice({
     addProductToCartListState: (state, action) => {
       const { name, price, img, likecount, _id, quantity, category } =
         action.payload;
-      state.cartlist.push({
-        id: _id,
-        name,
-        price,
-        category,
-        attachment: img,
-        quantity: quantity ? quantity : 1,
+      const isMultiple = state.cartlist.some((item, index) => {
+        return item.id === _id;
       });
+      console.log("isMultiple", isMultiple);
+      if (isMultiple) {
+        for (let v of state.cartlist) {
+          if (v.id === _id) {
+            v.quantity++;
+          }
+        }
+      } else {
+        state.cartlist.push({
+          id: _id,
+          name,
+          price,
+          category,
+          attachment: img,
+          quantity: quantity ? quantity : 1,
+        });
+      }
     },
     requestChangeCartList: (state, action) => {},
     changeQuantityOfProductItem: (state, action) => {

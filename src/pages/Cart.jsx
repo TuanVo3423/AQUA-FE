@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AccountReducer } from "../redux/Reducers/Account";
+import { SystemReducer } from "../redux/Reducers/System";
 import { AccountSelector } from "../redux/Selectors/Account";
 import { ProductSelector } from "../redux/Selectors/Product";
 
@@ -38,6 +39,14 @@ export default function Cart() {
         AccountReducer.actions.changeQuantityOfProductItem({
           idproduct,
           quantity: quantity - 1,
+        })
+      );
+    } else {
+      dispatch(
+        SystemReducer.actions.setMessageAlert({
+          kind: true,
+          message: "Cannot be further reduced because the number must be greater than or equal to 1",
+          type: "info",
         })
       );
     }

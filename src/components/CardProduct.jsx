@@ -75,7 +75,7 @@ export default function CardProduct({
             <Star size={16} weight="bold" />
           </div>
           <div className="flex text-sm text-[#999] font-semibold">
-            <p>({likecount} lượt đánh giá)</p>
+            <p>({likecount} reviews)</p>
             {/* <Heart size={32} weight="bold" className='text-red-500' /> */}
           </div>
         </div>

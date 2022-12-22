@@ -1,4 +1,5 @@
 import {
+  ClockCounterClockwise,
   FacebookLogo,
   InstagramLogo,
   ShoppingCart,
@@ -18,6 +19,7 @@ import Comments from "../components/Comments";
 import { useRef } from "react";
 import { CommentSelector } from "../redux/Selectors/Comment";
 import { fetchComments } from "../api";
+import { Link } from "react-router-dom";
 export default function Detail() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -30,6 +32,7 @@ export default function Detail() {
   const dataDetail = data.filter((item, index) => {
     return item._id === idDetail;
   });
+
   const handleComment = () => {
     const content = areaRef.current.value;
     if (!content.trim()) {
@@ -103,6 +106,15 @@ export default function Detail() {
   const handleDecreaseMount = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+    } else {
+      dispatch(
+        SystemReducer.actions.setMessageAlert({
+          kind: true,
+          message:
+            "Cannot be further reduced because the number must be greater than or equal to 1",
+          type: "info",
+        })
+      );
     }
   };
   // const handleRemoveItemCartList = ({ idproduct }) => {
@@ -172,10 +184,10 @@ export default function Detail() {
               </div>
             </div>
             <div className="space-y-2">
-              <p className="text-gray-800 font-semibold space-x-2">
+              {/* <p className="text-gray-800 font-semibold space-x-2">
                 <span>Availability: </span>
                 <span className="text-green-600">In Stock</span>
-              </p>
+              </p> */}
               <p className="space-x-2">
                 <span className="text-gray-800 font-semibold">Category: </span>
                 <span className="text-gray-600">{dataDetail[0].category}</span>
@@ -288,19 +300,20 @@ export default function Detail() {
                 </span>{" "}
                 Add to cart
               </a>
-              <a
-                className="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase 
+              <Link
+                to={"/history"}
+                className="border flex border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase 
                       hover:bg-transparent hover:text-primary transition text-sm"
               >
                 <span className="mr-2">
-                  <i className="far fa-heart" />
+                  <ClockCounterClockwise size={20} weight="bold" />
                 </span>{" "}
-                Wishlist
-              </a>
+                History
+              </Link>
             </div>
             {/* add to cart button end */}
             {/* product share icons */}
-            <div className="flex space-x-3 mt-4">
+            <div className="flex space-x-3 mt-4 cursor-pointer">
               <FacebookLogo size={32} weight="fill" className="text-primary" />
               <TwitterLogo size={32} weight="bold" className="text-primary" />
               <InstagramLogo size={32} weight="fill" className="text-primary" />
@@ -314,18 +327,79 @@ export default function Detail() {
         <div className="container pb-16">
           {/* detail buttons */}
           <h3 className="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-bold text-2xl">
-            Product Details
+            Product information
           </h3>
           {/* details button end */}
           {/* details content */}
           <div className="w-full pt-6">
             <div className="space-y-3 text-gray-600">
               <p className="border-b border-gray-200 font-roboto text-gray-600 pb-3 font-medium">
-                {dataDetail[0].detailDescription}
+                {dataDetail[0].detailDescription.split("$")[0]}
               </p>
+
               {/* <div className="w-full h-[2px] bg-gray-600 text-gray-600"></div> */}
             </div>
           </div>
+          <table className="table-auto border-collapse md:w-2/3 w-full text-left text-gray-600 text-sm mt-6">
+            <tbody>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Screen:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[1]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Operating system:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[2]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Chip:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[3]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  RAM:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[4]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Rear camera:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[5]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Front camera:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[6]}
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2 px-4 border border-gray-300 w-40 font-medium">
+                  Battery, Charger:
+                </th>
+                <td className="py-2 px-4 border border-gray-300">
+                  {dataDetail[0].detailDescription.split("$")[7]}
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <div className="w-full pt-6">
             <div className="space-y-3 text-gray-600">
               <p className="border-b border-gray-200 font-roboto text-gray-600 pb-3 font-bold text-2xl">
