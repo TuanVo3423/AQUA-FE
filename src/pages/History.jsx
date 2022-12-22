@@ -120,7 +120,7 @@ export default function Wishlist() {
                     {/* cart content */}
                     <div className="md:w-1/3 w-full">
                       <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
-                        {item?.name}
+                        {item?.name(item?.quantity)}
                       </h2>
                       <p className="text-gray-500 text-sm">
                         Category:{" "}
@@ -130,7 +130,7 @@ export default function Wishlist() {
                     {/* cart content end */}
                     <div>
                       <p className="text-primary text-lg font-semibold">
-                        ${item?.price}
+                        ${item?.price * item.quantity}
                       </p>
                     </div>
                     <p className="ml-auto md:ml-0 block px-6 py-2 text-center text-primary text-lg font-semibold">
