@@ -120,8 +120,14 @@ export default function Wishlist() {
                     {/* cart content */}
                     <div className="md:w-1/3 w-full">
                       <h2 className="text-gray-800 mb-1 xl:text-xl textl-lg font-medium uppercase">
-                        {item?.name(item?.quantity)}
+                        {item?.name}
                       </h2>
+                      <p className="text-gray-500 text-sm">
+                        Quantity:
+                        <span className="text-green-600">
+                          ({item?.quantity})
+                        </span>
+                      </p>
                       <p className="text-gray-500 text-sm">
                         Category:{" "}
                         <span className="text-green-600">{item?.category}</span>
